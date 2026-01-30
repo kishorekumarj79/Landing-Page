@@ -101,26 +101,53 @@ const Compatibility = () => {
                     })}
                 </div>
 
-                {/* MOBILE: Clean Grid Layout (below md) */}
-                <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {ecosystems.map((eco, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: i * 0.1 }}
-                            className={`p-6 rounded-2xl ${eco.bg} border ${eco.border} flex flex-col items-center text-center transform-gpu`}
-                        >
-                            <eco.icon className={`w-8 h-8 ${eco.color} mb-3`} />
-                            <div className="text-white font-bold">{eco.name}</div>
-                        </motion.div>
-                    ))}
-                    {/* Mobile Central Hub Indicator */}
-                    <div className="col-span-1 sm:col-span-2 mt-8 p-6 bg-secondary/5 rounded-2xl border border-secondary/10">
-                        <div className="text-2xl font-bold font-display text-secondary">Klefki Hub</div>
-                        <p className="text-xs text-slate-500 uppercase tracking-widest mt-1">Universal Interoperability</p>
+                {/* MOBILE: Innovative Bento Grid (below md) */}
+                <div className="md:hidden space-y-8">
+                    {/* Mobile Central Hub - Reimagined as a Header */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="relative mx-auto w-32 h-32 bg-white rounded-full shadow-[0_0_50px_rgba(108,92,231,0.2)] flex flex-col items-center justify-center border-4 border-secondary/10 z-20"
+                    >
+                        <div className="absolute inset-0 bg-secondary/20 rounded-full blur-xl animate-pulse" />
+                        <div className="text-xl font-bold font-display text-secondary">Klefki</div>
+                        <div className="text-[8px] text-slate-400 font-medium uppercase tracking-[0.2em]">Hub</div>
+                    </motion.div>
+
+                    {/* Staggered Grid */}
+                    <div className="grid grid-cols-2 gap-3 pt-4">
+                        {ecosystems.map((eco, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ delay: i * 0.1 }}
+                                className={`relative p-5 rounded-3xl ${eco.bg} border ${eco.border} flex flex-col items-center justify-center gap-3 backdrop-blur-md transform-gpu ${i === 0 ? 'col-span-2 py-8' : 'col-span-1'
+                                    }`}
+                            >
+                                <div className={`w-12 h-12 rounded-2xl bg-white/80 shadow-inner flex items-center justify-center`}>
+                                    <eco.icon className={`w-6 h-6 ${eco.color}`} />
+                                </div>
+                                <div className="text-[11px] font-bold text-slate-800 tracking-tight leading-tight px-1 uppercase">
+                                    {eco.name}
+                                </div>
+
+                                {/* Decorative Connector Node */}
+                                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-secondary/20 shadow-sm" />
+                            </motion.div>
+                        ))}
                     </div>
+
+                    {/* Footer Tagline */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-medium"
+                    >
+                        Universal Access Protocol
+                    </motion.div>
                 </div>
             </div>
         </section>
