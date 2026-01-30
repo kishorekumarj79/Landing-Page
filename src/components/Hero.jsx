@@ -70,96 +70,79 @@ const Hero = () => {
             {/* Integrated Top Banner */}
             <div className="absolute top-0 left-0 w-full z-20 p-6 md:p-10">
                 <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-8">
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
                         <div className="flex items-center gap-3">
-                            {/* Vlinder Logo from User URL */}
                             <img
                                 src="https://s3.ap-south-1.amazonaws.com/io.vlinder.logos/vlinder-logo.png"
                                 alt="Vlinder Logo"
-                                className="w-12 h-12 object-contain"
+                                className="w-10 h-10 md:w-12 md:h-12 object-contain"
                             />
-                            <div className="text-3xl font-display font-bold text-white tracking-tighter">Vlinder</div>
+                            <div className="text-2xl md:text-3xl font-display font-bold text-white tracking-tighter">Vlinder</div>
                         </div>
-                        <div className="h-10 w-px bg-white/20 hidden md:block"></div> {/* Vertical Divider */}
+                        <div className="hidden md:block h-10 w-px bg-white/20"></div> {/* Vertical Divider */}
                         <div className="flex items-center gap-3">
                             <img
                                 src={mosipLogo}
                                 alt="MOSIP Logo"
-                                className="h-12 object-contain"
+                                className="h-8 md:h-12 object-contain"
                             />
                         </div>
                     </div>
 
-                    {/* MOSIP Connect 2026 Badge on second line */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.5 }}
-                        className="inline-flex items-center px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-md w-fit"
+                        className="inline-flex items-center px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-md w-fit mt-2 md:mt-0"
                     >
                         <span className="w-2 h-2 rounded-full bg-accent mr-3 animate-pulse" />
-                        <span className="text-accent font-mono text-sm tracking-widest uppercase font-bold">MOSIP Connect 2026</span>
+                        <span className="text-accent font-mono text-[10px] md:text-sm tracking-widest uppercase font-bold text-center">MOSIP Connect 2026</span>
                     </motion.div>
                 </div>
             </div>
 
             {/* Animated Background Elements */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary/20 via-primary to-primary" />
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
+
+                {/* Simplified Blurs for performance */}
+                <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/5 rounded-full blur-3xl" />
 
                 {/* Network Grid Overlay */}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]" />
 
-                {/* Innovative Data Flow */}
-                <DataFlow />
+                {/* Innovative Data Flow - Hidden on small mobile */}
+                <div className="hidden sm:block">
+                    <DataFlow />
+                </div>
 
-                {/* Floating Innovative Elements */}
-                <motion.div
-                    animate={{
-                        y: [-20, 20],
-                        opacity: [0.3, 0.6, 0.3],
-                        scale: [1, 1.1, 1]
-                    }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-20 right-[15%] w-64 h-64 bg-accent/10 rounded-full blur-[100px] z-0"
-                />
-
-                {/* Floating Tech Symbols */}
-                <motion.div
-                    animate={{ y: [0, -40, 0], x: [0, 20, 0], rotate: [0, 10, 0] }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-40 right-[10%] opacity-10 blur-[2px]"
-                >
-                    <Shield className="w-24 h-24 text-accent" />
-                </motion.div>
-                <motion.div
-                    animate={{ y: [0, 50, 0], x: [0, -30, 0], rotate: [0, -15, 0] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
-                    className="absolute top-[20%] right-[25%] opacity-5 blur-[4px]"
-                >
-                    <Globe className="w-40 h-40 text-secondary" />
-                </motion.div>
-                <motion.div
-                    animate={{ y: [0, -30, 0], rotate: [0, 360, 0] }}
-                    transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-60 right-[5%] opacity-10 blur-[1px]"
-                >
-                    <Wallet className="w-16 h-16 text-highlight" />
-                </motion.div>
-
-                <motion.div
-                    animate={{
-                        x: [-30, 30],
-                        opacity: [0.2, 0.4, 0.2],
-                    }}
-                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-40 left-[10%] w-80 h-80 bg-secondary/10 rounded-full blur-[120px] z-0"
-                />
+                {/* Floating Tech Symbols - Only on Desktop for performance */}
+                <div className="hidden lg:block">
+                    <motion.div
+                        animate={{ y: [0, -40, 0], x: [0, 20, 0], rotate: [0, 10, 0] }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                        className="absolute top-40 right-[10%] opacity-10 blur-[2px]"
+                    >
+                        <Shield className="w-24 h-24 text-accent" />
+                    </motion.div>
+                    <motion.div
+                        animate={{ y: [0, 50, 0], x: [0, -30, 0], rotate: [0, -15, 0] }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
+                        className="absolute top-[20%] right-[25%] opacity-5 blur-[4px]"
+                    >
+                        <Globe className="w-40 h-40 text-secondary" />
+                    </motion.div>
+                    <motion.div
+                        animate={{ y: [0, -30, 0], rotate: [0, 360, 0] }}
+                        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                        className="absolute bottom-60 right-[5%] opacity-10 blur-[1px]"
+                    >
+                        <Wallet className="w-16 h-16 text-highlight" />
+                    </motion.div>
+                </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-40 md:pt-20">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
                     <motion.div
@@ -169,11 +152,11 @@ const Hero = () => {
                         className="text-left"
                     >
 
-                        <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight text-white mb-6">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold leading-[1.1] text-white mb-6">
                             Powering the <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-highlight to-secondary">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-highlight to-secondary px-1">
                                 Next Generation
-                            </span> <br />
+                            </span> <br className="hidden sm:block" />
                             of Digital Identity
                         </h1>
 

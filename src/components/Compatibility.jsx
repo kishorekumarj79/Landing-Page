@@ -34,9 +34,8 @@ const Compatibility = () => {
                     </p>
                 </motion.div>
 
-                {/* VISUAL FIX: Static Circular Layout with Animated Lines */}
-                <div className="relative h-[600px] w-full max-w-5xl mx-auto flex items-center justify-center">
-
+                {/* DESKTOP: Static Circular Layout (md+) */}
+                <div className="hidden md:flex relative h-[600px] w-full max-w-5xl mx-auto items-center justify-center">
                     {/* Animated Rings Background */}
                     <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-secondary/20 animate-[spin_40s_linear_infinite]" />
                     <div className="absolute w-[500px] h-[500px] rounded-full border border-dashed border-gray-200 animate-[spin_60s_linear_infinite_reverse]" />
@@ -44,13 +43,12 @@ const Compatibility = () => {
                     {/* Connection Lines Layer */}
                     <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
                         {ecosystems.map((_, index) => {
-                            const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2); // Start from top (-90deg)
-                            const x2 = 50 + (Math.cos(angle) * 40); // 40% radius (approx 200px / 500px)
+                            const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
+                            const x2 = 50 + (Math.cos(angle) * 40);
                             const y2 = 50 + (Math.sin(angle) * 40);
 
                             return (
                                 <g key={index}>
-                                    {/* Base Line */}
                                     <line
                                         x1="50%" y1="50%"
                                         x2={`${x2}%`} y2={`${y2}%`}
@@ -58,7 +56,6 @@ const Compatibility = () => {
                                         strokeWidth="2"
                                         strokeDasharray="4 4"
                                     />
-                                    {/* Pulsing Data Packet */}
                                     <circle r="3" fill="#6C5CE7">
                                         <animateMotion
                                             dur="3s"
@@ -72,24 +69,18 @@ const Compatibility = () => {
                     </svg>
 
                     {/* Central Hub */}
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        className="relative z-20"
-                    >
+                    <div className="relative z-20">
                         <div className="absolute inset-0 bg-secondary/20 rounded-full blur-xl animate-pulse" />
                         <div className="w-40 h-40 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-secondary/10 relative z-20">
                             <div className="text-3xl font-bold font-display text-secondary tracking-tighter">Klefki</div>
                             <div className="text-xs text-slate-400 font-medium tracking-widest uppercase mt-1">Universal</div>
                         </div>
-                    </motion.div>
+                    </div>
 
-                    {/* Orbiting Planets (Positioned Absolutely) */}
+                    {/* Orbiting Planets */}
                     {ecosystems.map((item, index) => {
                         const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                        const radius = 220; // px
-                        // Since we are inside a flex-center container, we can use simple trigonometry from center
-                        // We need to translate from center 0,0
+                        const radius = 220;
                         const x = Math.cos(angle) * radius;
                         const y = Math.sin(angle) * radius;
 
@@ -103,11 +94,32 @@ const Compatibility = () => {
                             >
                                 <div className={`w-28 h-28 ${item.bg} ${item.border} border rounded-2xl shadow-lg flex flex-col items-center justify-center backdrop-blur-md hover:scale-110 transition-transform cursor-pointer group bg-white/80`}>
                                     <item.icon className={`w-8 h-8 ${item.color} mb-2 group-hover:rotate-12 transition-transform`} />
-                                    <span className={`text-sm font-bold ${item.color}`}>{item.name}</span>
+                                    <span className={`text-[10px] font-bold ${item.color} px-2`}>{item.name}</span>
                                 </div>
                             </motion.div>
                         );
                     })}
+                </div>
+
+                {/* MOBILE: Clean Grid Layout (below md) */}
+                <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {ecosystems.map((item, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className={`p-6 ${item.bg} ${item.border} border rounded-2xl flex flex-col items-center gap-3 bg-white/50 backdrop-blur-sm`}
+                        >
+                            <item.icon className={`w-10 h-10 ${item.color}`} />
+                            <span className={`text-sm font-bold ${item.color}`}>{item.name}</span>
+                        </motion.div>
+                    ))}
+                    {/* Mobile Central Hub Indicator */}
+                    <div className="col-span-1 sm:col-span-2 mt-8 p-6 bg-secondary/5 rounded-2xl border border-secondary/10">
+                        <div className="text-2xl font-bold font-display text-secondary">Klefki Hub</div>
+                        <p className="text-xs text-slate-500 uppercase tracking-widest mt-1">Universal Interoperability</p>
+                    </div>
                 </div>
             </div>
         </section>
