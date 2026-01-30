@@ -5,11 +5,11 @@ import { Globe, Heart, Shield, Award, Users, Zap } from 'lucide-react';
 
 const Compatibility = () => {
     const ecosystems = [
-        { name: "MOSIP", icon: Globe, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+        { name: "INJI Wallet", icon: Globe, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
         { name: "DigiLocker", icon: Shield, color: "text-indigo-400", bg: "bg-indigo-500/10", border: "border-indigo-500/20" },
         { name: "EU Digital Identity Wallet", icon: Users, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
         { name: "UAE PASS", icon: Heart, color: "text-red-400", bg: "bg-red-500/10", border: "border-red-500/20" },
-        { name: "MetaMask", icon: Award, color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+        { name: "Microsoft Entra Verified ID", icon: Award, color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
     ];
 
     return (
