@@ -6,6 +6,14 @@ import { motion } from 'framer-motion';
 const Contact = () => {
     const [isSending, setIsSending] = useState(false);
     const [isSent, setIsSent] = useState(false);
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const handleSend = (e) => {
         e.preventDefault();
@@ -26,8 +34,8 @@ const Contact = () => {
                     </pattern>
                     <rect width="100%" height="100%" fill="url(#grid)" />
                 </svg>
-                {/* Floating Nodes */}
-                {[...Array(5)].map((_, i) => (
+                {/* Floating Nodes - Only on Desktop */}
+                {!isMobile && [...Array(5)].map((_, i) => (
                     <motion.div
                         key={i}
                         className="absolute w-2 h-2 rounded-full bg-accent"

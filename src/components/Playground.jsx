@@ -4,7 +4,15 @@ import { ArrowUpRight, Code, Beaker, Zap, Award, Shield, Terminal } from 'lucide
 
 const Playground = () => {
     const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { once: false, amount: 0.2 });
+    const isInView = useInView(containerRef, { once: false, amount: 0.1 });
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Typewriter effect state
     const [codeText, setCodeText] = useState('');
@@ -43,7 +51,9 @@ const Playground = () => {
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
             {/* Background Glows */}
-            <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-green-500/10 rounded-full blur-[100px] animate-pulse" />
+            {!isMobile && (
+                <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-green-500/10 rounded-full blur-[100px] animate-pulse" />
+            )}
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -98,12 +108,12 @@ const Playground = () => {
                             ].map((item, i) => (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    whileHover={{ x: 10, backgroundColor: "rgba(255,255,255,0.1)" }}
-                                    className="group p-6 rounded-2xl bg-black/80 border border-white/10 hover:border-green-500/50 transition-all cursor-pointer backdrop-blur-sm"
+                                    whileHover={!isMobile ? { x: 10, backgroundColor: "rgba(255,255,255,0.1)" } : {}}
+                                    className="group p-6 rounded-2xl bg-black/80 border border-white/10 hover:border-green-500/50 transition-all cursor-pointer backdrop-blur-sm transform-gpu"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-4">

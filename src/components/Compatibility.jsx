@@ -12,17 +12,26 @@ const Compatibility = () => {
         { name: "Microsoft Entra Verified ID", icon: Award, color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
     ];
 
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
-        <section className="py-24 bg-surface text-center overflow-hidden relative">
+        <section id="compatibility" className="py-24 bg-surface text-center overflow-hidden relative">
             {/* Tech Mesh Background */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="mb-16"
+                    className="mb-16 transform-gpu"
                 >
                     <div className="inline-flex items-center px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-sm font-mono mb-4">
                         <Zap size={14} className="mr-2" />
@@ -34,72 +43,74 @@ const Compatibility = () => {
                     </p>
                 </motion.div>
 
-                {/* DESKTOP: Static Circular Layout (md+) */}
-                <div className="hidden md:flex relative h-[600px] w-full max-w-5xl mx-auto items-center justify-center">
-                    {/* Animated Rings Background */}
-                    <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-secondary/20 animate-[spin_40s_linear_infinite]" />
-                    <div className="absolute w-[500px] h-[500px] rounded-full border border-dashed border-gray-200 animate-[spin_60s_linear_infinite_reverse]" />
+                {/* DESKTOP: Static Circular Layout (md+) - Only Render if not mobile */}
+                {!isMobile && (
+                    <div className="hidden md:flex relative h-[600px] w-full max-w-5xl mx-auto items-center justify-center transform-gpu">
+                        {/* Animated Rings Background */}
+                        <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-secondary/20 animate-[spin_40s_linear_infinite]" />
+                        <div className="absolute w-[500px] h-[500px] rounded-full border border-dashed border-gray-200 animate-[spin_60s_linear_infinite_reverse]" />
 
-                    {/* Connection Lines Layer */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                        {ecosystems.map((_, index) => {
+                        {/* Connection Lines Layer */}
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                            {ecosystems.map((_, index) => {
+                                const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
+                                const x2 = 50 + (Math.cos(angle) * 40);
+                                const y2 = 50 + (Math.sin(angle) * 40);
+
+                                return (
+                                    <g key={index}>
+                                        <line
+                                            x1="50%" y1="50%"
+                                            x2={`${x2}%`} y2={`${y2}%`}
+                                            stroke="rgba(108, 92, 231, 0.2)"
+                                            strokeWidth="2"
+                                            strokeDasharray="4 4"
+                                        />
+                                        <circle r="3" fill="#6C5CE7">
+                                            <animateMotion
+                                                dur="3s"
+                                                repeatCount="indefinite"
+                                                path={`M ${500 / 2} ${600 / 2} L ${(500 / 2) + (Math.cos(angle) * 200)} ${(600 / 2) + (Math.sin(angle) * 200)}`}
+                                            />
+                                        </circle>
+                                    </g>
+                                );
+                            })}
+                        </svg>
+
+                        {/* Central Hub */}
+                        <div className="relative z-20">
+                            <div className="absolute inset-0 bg-secondary/20 rounded-full blur-xl animate-pulse" />
+                            <div className="w-40 h-40 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-secondary/10 relative z-20">
+                                <div className="text-3xl font-bold font-display text-secondary tracking-tighter">Klefki</div>
+                                <div className="text-xs text-slate-400 font-medium tracking-widest uppercase mt-1">Universal</div>
+                            </div>
+                        </div>
+
+                        {/* Orbiting Planets */}
+                        {ecosystems.map((item, index) => {
                             const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                            const x2 = 50 + (Math.cos(angle) * 40);
-                            const y2 = 50 + (Math.sin(angle) * 40);
+                            const radius = 220;
+                            const x = Math.cos(angle) * radius;
+                            const y = Math.sin(angle) * radius;
 
                             return (
-                                <g key={index}>
-                                    <line
-                                        x1="50%" y1="50%"
-                                        x2={`${x2}%`} y2={`${y2}%`}
-                                        stroke="rgba(108, 92, 231, 0.2)"
-                                        strokeWidth="2"
-                                        strokeDasharray="4 4"
-                                    />
-                                    <circle r="3" fill="#6C5CE7">
-                                        <animateMotion
-                                            dur="3s"
-                                            repeatCount="indefinite"
-                                            path={`M ${500 / 2} ${600 / 2} L ${(500 / 2) + (Math.cos(angle) * 200)} ${(600 / 2) + (Math.sin(angle) * 200)}`}
-                                        />
-                                    </circle>
-                                </g>
+                                <motion.div
+                                    key={index}
+                                    className="absolute z-10 transform-gpu"
+                                    initial={{ x: 0, y: 0, opacity: 0 }}
+                                    whileInView={{ x: x, y: y, opacity: 1 }}
+                                    transition={{ duration: 0.8, delay: index * 0.1 }}
+                                >
+                                    <div className={`w-28 h-28 ${item.bg} ${item.border} border rounded-2xl shadow-lg flex flex-col items-center justify-center backdrop-blur-md hover:scale-110 transition-transform cursor-pointer group bg-white/80 transform-gpu`}>
+                                        <item.icon className={`w-8 h-8 ${item.color} mb-2 group-hover:rotate-12 transition-transform`} />
+                                        <span className={`text-[10px] font-bold ${item.color} px-2`}>{item.name}</span>
+                                    </div>
+                                </motion.div>
                             );
                         })}
-                    </svg>
-
-                    {/* Central Hub */}
-                    <div className="relative z-20">
-                        <div className="absolute inset-0 bg-secondary/20 rounded-full blur-xl animate-pulse" />
-                        <div className="w-40 h-40 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-secondary/10 relative z-20">
-                            <div className="text-3xl font-bold font-display text-secondary tracking-tighter">Klefki</div>
-                            <div className="text-xs text-slate-400 font-medium tracking-widest uppercase mt-1">Universal</div>
-                        </div>
                     </div>
-
-                    {/* Orbiting Planets */}
-                    {ecosystems.map((item, index) => {
-                        const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                        const radius = 220;
-                        const x = Math.cos(angle) * radius;
-                        const y = Math.sin(angle) * radius;
-
-                        return (
-                            <motion.div
-                                key={index}
-                                className="absolute z-10 transform-gpu"
-                                initial={{ x: 0, y: 0, opacity: 0 }}
-                                whileInView={{ x: x, y: y, opacity: 1 }}
-                                transition={{ duration: 0.8, delay: index * 0.1 }}
-                            >
-                                <div className={`w-28 h-28 ${item.bg} ${item.border} border rounded-2xl shadow-lg flex flex-col items-center justify-center backdrop-blur-md hover:scale-110 transition-transform cursor-pointer group bg-white/80 transform-gpu`}>
-                                    <item.icon className={`w-8 h-8 ${item.color} mb-2 group-hover:rotate-12 transition-transform`} />
-                                    <span className={`text-[10px] font-bold ${item.color} px-2`}>{item.name}</span>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
+                )}
 
                 {/* MOBILE: Innovative Bento Grid (below md) */}
                 <div className="md:hidden space-y-8">

@@ -176,10 +176,10 @@ const Lifecycle = () => {
                         {steps.map((step, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 50 }}
+                                initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                className={`flex flex-col md:flex-row items-center justify-between gap-12 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
+                                viewport={{ once: true, margin: "-50px" }}
+                                className={`flex flex-col md:flex-row items-center justify-between gap-12 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} transform-gpu will-change-transform`}
                             >
                                 {/* Text Side */}
                                 <div className={`flex-1 text-center ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} order-2 md:order-none`}>
@@ -196,8 +196,8 @@ const Lifecycle = () => {
 
                                 {/* Visual Side */}
                                 <div className={`flex-1 flex justify-center order-3 md:order-none ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
-                                    <div className="relative group perspective-1000">
-                                        <div className="absolute inset-0 bg-accent/20 blur-3xl rounded-full opacity-20 group-hover:opacity-40 transition-opacity" />
+                                    <div className="relative group">
+                                        <div className="absolute inset-0 bg-accent/10 blur-xl rounded-full opacity-10 group-hover:opacity-30 transition-opacity" />
                                         {step.custom}
                                     </div>
                                 </div>
