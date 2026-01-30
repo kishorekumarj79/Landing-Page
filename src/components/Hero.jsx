@@ -165,7 +165,12 @@ const Hero = () => {
                         </p>
 
                         <div className="flex flex-wrap gap-4">
-                            <button className="group relative px-8 py-4 bg-accent text-primary font-bold rounded-full overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(45,226,230,0.4)]">
+                            <button
+                                onClick={() => {
+                                    document.getElementById('playground')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="group relative px-8 py-4 bg-accent text-primary font-bold rounded-full overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(45,226,230,0.4)]"
+                            >
                                 <span className="relative z-10 flex items-center">
                                     Explore Use Cases
                                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
