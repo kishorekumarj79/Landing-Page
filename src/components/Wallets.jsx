@@ -1,11 +1,83 @@
-
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Smartphone, ShieldCheck, Globe, CreditCard, CheckCircle, ArrowRight, Wallet, Menu, ChevronDown, User, Search, Bell } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Smartphone, ShieldCheck, Globe, CreditCard, CheckCircle, ArrowRight, Wallet, Menu, ChevronDown, User, Search, Bell, X } from 'lucide-react';
+
+// Import local video assets
+import injiVideo from '../assets/MOSIP.mp4';
+import klefkiVideo from '../assets/MOSIP ( Klefki) (1).mp4';
 
 const Wallets = () => {
+    const [selectedVideo, setSelectedVideo] = React.useState(null);
+
+    const openModal = (video) => {
+        setSelectedVideo(video);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        setSelectedVideo(null);
+        document.body.style.overflow = 'auto';
+    };
+
+    React.useEffect(() => {
+        const handleEsc = (e) => {
+            if (e.key === 'Escape') closeModal();
+        };
+        window.addEventListener('keydown', handleEsc);
+        return () => window.removeEventListener('keydown', handleEsc);
+    }, []);
+
     return (
         <section id="demos" className="py-24 bg-surface relative overflow-hidden">
+            <AnimatePresence>
+                {selectedVideo && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={closeModal}
+                        className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-20"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="relative w-full max-w-3xl bg-slate-900 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(45,226,230,0.2)] border border-white/10"
+                        >
+                            <button
+                                onClick={closeModal}
+                                className="absolute top-6 right-6 z-10 p-3 bg-slate-900/80 hover:bg-slate-800 rounded-full transition-all text-white shadow-2xl border border-white/20 backdrop-blur-md"
+                            >
+                                <X size={24} />
+                            </button>
+
+                            <div className="aspect-video w-full bg-black">
+                                <video
+                                    src={selectedVideo}
+                                    controls
+                                    autoPlay
+                                    className="w-full h-full object-contain"
+                                >
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+
+                            <div className="p-6 bg-gradient-to-r from-slate-900 to-slate-800 flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
+                                        <Wallet size={20} />
+                                    </div>
+                                    <div>
+                                        <div className="text-white font-bold">Watch Technical Demo</div>
+                                        <div className="text-[10px] text-slate-400 uppercase tracking-widest">Klefki / Inji Ecosystem</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 md:mb-20">
                     <motion.h2
@@ -128,7 +200,10 @@ const Wallets = () => {
                             ))}
                         </div>
 
-                        <button className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors flex items-center justify-center group">
+                        <button
+                            onClick={() => openModal(injiVideo)}
+                            className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors flex items-center justify-center group"
+                        >
                             Watch Inji Demo
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
@@ -270,7 +345,10 @@ const Wallets = () => {
                             ))}
                         </div>
 
-                        <button className="w-full py-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold transition-colors flex items-center justify-center group">
+                        <button
+                            onClick={() => openModal(klefkiVideo)}
+                            className="w-full py-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold transition-colors flex items-center justify-center group"
+                        >
                             Watch Klefki Demo
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
