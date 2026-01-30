@@ -106,7 +106,7 @@ const Hero = () => {
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary/20 via-primary to-primary" />
 
                 {/* Simplified Blurs for performance */}
-                <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/5 rounded-full blur-3xl" />
+                <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/5 rounded-full blur-2xl md:blur-3xl" />
 
                 {/* Network Grid Overlay */}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]" />
@@ -119,23 +119,32 @@ const Hero = () => {
                 {/* Floating Tech Symbols - Only on Desktop for performance */}
                 <div className="hidden lg:block">
                     <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 0.1 }}
+                        viewport={{ once: true, margin: "-100px" }}
                         animate={{ y: [0, -40, 0], x: [0, 20, 0], rotate: [0, 10, 0] }}
                         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                        className="absolute top-40 right-[10%] opacity-10 blur-[2px]"
+                        className="absolute top-40 right-[10%] blur-[2px] transform-gpu"
                     >
                         <Shield className="w-24 h-24 text-accent" />
                     </motion.div>
                     <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 0.05 }}
+                        viewport={{ once: true, margin: "-100px" }}
                         animate={{ y: [0, 50, 0], x: [0, -30, 0], rotate: [0, -15, 0] }}
                         transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
-                        className="absolute top-[20%] right-[25%] opacity-5 blur-[4px]"
+                        className="absolute top-[20%] right-[25%] blur-[4px] transform-gpu"
                     >
                         <Globe className="w-40 h-40 text-secondary" />
                     </motion.div>
                     <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 0.1 }}
+                        viewport={{ once: true, margin: "-100px" }}
                         animate={{ y: [0, -30, 0], rotate: [0, 360, 0] }}
                         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                        className="absolute bottom-60 right-[5%] opacity-10 blur-[1px]"
+                        className="absolute bottom-60 right-[5%] blur-[1px] transform-gpu"
                     >
                         <Wallet className="w-16 h-16 text-highlight" />
                     </motion.div>

@@ -1,9 +1,11 @@
-
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight, Code, Beaker, Zap, Award, Shield, Terminal } from 'lucide-react';
 
 const Playground = () => {
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: false, amount: 0.2 });
+
     // Typewriter effect state
     const [codeText, setCodeText] = useState('');
     const fullCode = JSON.stringify({
@@ -22,6 +24,8 @@ const Playground = () => {
     }, null, 2);
 
     useEffect(() => {
+        if (!isInView) return;
+
         let i = 0;
         const interval = setInterval(() => {
             setCodeText(fullCode.substring(0, i));
@@ -29,12 +33,12 @@ const Playground = () => {
             if (i > fullCode.length) {
                 i = 0; // Loop interactions
             }
-        }, 50);
+        }, 70); // Slightly slower for better CPU performance
         return () => clearInterval(interval);
-    }, [fullCode]);
+    }, [fullCode, isInView]);
 
     return (
-        <section id="playground" className="py-24 bg-black relative overflow-hidden">
+        <section id="playground" ref={containerRef} className="py-24 bg-black relative overflow-hidden">
             {/* Grid Background */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
 

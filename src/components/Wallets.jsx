@@ -36,7 +36,7 @@ const Wallets = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={closeModal}
-                        className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-20"
+                        className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-20"
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -99,10 +99,10 @@ const Wallets = () => {
 
                     {/* Inji Wallet Column */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100 hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform"
                     >
                         <div className="flex items-center mb-8">
                             <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center mr-4 shadow-lg shadow-blue-600/20">
@@ -211,10 +211,10 @@ const Wallets = () => {
 
                     {/* Klefki Wallet Column */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform perspective-1000"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100 hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform"
                     >
                         <div className="flex items-center mb-8">
                             <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mr-4 shadow-lg shadow-purple-600/20">
@@ -245,9 +245,7 @@ const Wallets = () => {
                                         </div>
                                         <div className="relative">
                                             <div className="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center">
-                                                <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ repeat: Infinity, duration: 2 }}>
-                                                    <Globe className="w-4 h-4 text-slate-400" />
-                                                </motion.div>
+                                                <Globe className="w-4 h-4 text-slate-400" />
                                             </div>
                                             <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 rounded-full flex items-center justify-center text-[8px] text-white">
                                                 ↺

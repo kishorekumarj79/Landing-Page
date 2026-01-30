@@ -87,12 +87,12 @@ const Compatibility = () => {
                         return (
                             <motion.div
                                 key={index}
-                                className="absolute z-10"
+                                className="absolute z-10 transform-gpu"
                                 initial={{ x: 0, y: 0, opacity: 0 }}
                                 whileInView={{ x: x, y: y, opacity: 1 }}
                                 transition={{ duration: 0.8, delay: index * 0.1 }}
                             >
-                                <div className={`w-28 h-28 ${item.bg} ${item.border} border rounded-2xl shadow-lg flex flex-col items-center justify-center backdrop-blur-md hover:scale-110 transition-transform cursor-pointer group bg-white/80`}>
+                                <div className={`w-28 h-28 ${item.bg} ${item.border} border rounded-2xl shadow-lg flex flex-col items-center justify-center backdrop-blur-md hover:scale-110 transition-transform cursor-pointer group bg-white/80 transform-gpu`}>
                                     <item.icon className={`w-8 h-8 ${item.color} mb-2 group-hover:rotate-12 transition-transform`} />
                                     <span className={`text-[10px] font-bold ${item.color} px-2`}>{item.name}</span>
                                 </div>
@@ -103,16 +103,17 @@ const Compatibility = () => {
 
                 {/* MOBILE: Clean Grid Layout (below md) */}
                 <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {ecosystems.map((item, index) => (
+                    {ecosystems.map((eco, i) => (
                         <motion.div
-                            key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: index * 0.1 }}
-                            className={`p-6 ${item.bg} ${item.border} border rounded-2xl flex flex-col items-center gap-3 bg-white/50 backdrop-blur-sm`}
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ delay: i * 0.1 }}
+                            className={`p-6 rounded-2xl ${eco.bg} border ${eco.border} flex flex-col items-center text-center transform-gpu`}
                         >
-                            <item.icon className={`w-10 h-10 ${item.color}`} />
-                            <span className={`text-sm font-bold ${item.color}`}>{item.name}</span>
+                            <eco.icon className={`w-8 h-8 ${eco.color} mb-3`} />
+                            <div className="text-white font-bold">{eco.name}</div>
                         </motion.div>
                     ))}
                     {/* Mobile Central Hub Indicator */}
