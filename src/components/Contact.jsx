@@ -1,12 +1,19 @@
-
 import React, { useState } from 'react';
 import { Linkedin, Mail, Twitter, Github, Send, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
     const [isSending, setIsSending] = useState(false);
     const [isSent, setIsSent] = useState(false);
+    const [isError, setIsError] = useState(false);
     const [isMobile, setIsMobile] = React.useState(false);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: ''
+    });
 
     React.useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -15,13 +22,43 @@ const Contact = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    const handleSend = (e) => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSend = async (e) => {
         e.preventDefault();
         setIsSending(true);
-        setTimeout(() => {
-            setIsSending(false);
+        setIsError(false);
+        setIsSent(false);
+
+        const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        try {
+            await emailjs.send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                {
+                    name: `${formData.firstName} ${formData.lastName}`,
+                    email: formData.email,
+                    message: formData.message,
+                    time: new Date().toLocaleString(),
+                    reply_to: formData.email
+                },
+                PUBLIC_KEY
+            );
+
             setIsSent(true);
-        }, 2000);
+            setFormData({ firstName: '', lastName: '', email: '', message: '' });
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            setIsError(true);
+        } finally {
+            setIsSending(false);
+        }
     };
 
     return (
@@ -84,11 +121,47 @@ const Contact = () => {
                         <h3 className="text-xl font-bold text-primary mb-6">Get in Touch</h3>
                         <form className="space-y-4" onSubmit={handleSend}>
                             <div className="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="First Name" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1" />
-                                <input type="text" placeholder="Last Name" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1" />
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    placeholder="First Name"
+                                    required
+                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1"
+                                />
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    placeholder="Last Name"
+                                    required
+                                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1"
+                                />
                             </div>
-                            <input type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1" />
-                            <textarea placeholder="Message" rows="4" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1" />
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Email Address"
+                                required
+                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1"
+                            />
+                            <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                placeholder="Message"
+                                rows="4"
+                                required
+                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all focus:-translate-y-1"
+                            />
+
+                            {isError && (
+                                <p className="text-red-500 text-sm font-medium">Failed to send message. Please try again later.</p>
+                            )}
 
                             <button
                                 disabled={isSending || isSent}

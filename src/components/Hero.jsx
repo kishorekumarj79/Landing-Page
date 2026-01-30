@@ -75,7 +75,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section className="relative min-h-[90vh] flex items-center bg-primary overflow-hidden">
+        <section className="relative min-h-[100vh] flex items-center bg-primary overflow-hidden">
             {/* Integrated Top Banner */}
             <div className="absolute top-0 left-0 w-full z-20 p-6 md:p-10">
                 <div className="flex flex-col gap-4">
@@ -160,7 +160,7 @@ const Hero = () => {
                 )}
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-40 md:pt-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-45 md:pt-30">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
                     <motion.div
