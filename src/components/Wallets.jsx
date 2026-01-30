@@ -83,7 +83,7 @@ const Wallets = () => {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
+                        viewport={{ once: true, margin: "-50px" }}
                         className="text-3xl md:text-5xl font-display font-bold text-primary mb-6 px-4"
                     >
                         Social Grant Credential
@@ -101,8 +101,8 @@ const Wallets = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100 hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform"
+                        viewport={{ once: true, margin: "-40px" }}
+                        className="bg-white md:bg-blue-50/50 p-8 rounded-3xl border border-blue-100 shadow-sm hover:shadow-2xl transition-shadow duration-300 transform-gpu"
                     >
                         <div className="flex items-center mb-8">
                             <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center mr-4 shadow-lg shadow-blue-600/20">
@@ -157,7 +157,7 @@ const Wallets = () => {
 
                                     <div className="grid grid-cols-1 gap-3">
                                         {/* Issuer Card 1 */}
-                                        <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col items-center text-center transition-all hover:bg-gray-50">
+                                        <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col items-center text-center transition-colors hover:bg-gray-50">
                                             <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mb-2">
                                                 <ShieldCheck className="w-6 h-6 text-red-500/80" />
                                             </div>
@@ -167,7 +167,7 @@ const Wallets = () => {
                                         </div>
 
                                         {/* Issuer Card 2 */}
-                                        <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col items-center text-center transition-all hover:bg-gray-50">
+                                        <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col items-center text-center transition-colors hover:bg-gray-50">
                                             <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mb-2">
                                                 <Globe className="w-6 h-6 text-green-600/80" />
                                             </div>
@@ -213,8 +213,8 @@ const Wallets = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="bg-blue-50/50 p-8 rounded-3xl border border-blue-100 hover:shadow-2xl transition-all duration-300 transform-gpu will-change-transform"
+                        viewport={{ once: true, margin: "-40px" }}
+                        className="bg-white md:bg-blue-50/50 p-8 rounded-3xl border border-blue-100 shadow-sm hover:shadow-2xl transition-shadow duration-300 transform-gpu"
                     >
                         <div className="flex items-center mb-8">
                             <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mr-4 shadow-lg shadow-purple-600/20">
