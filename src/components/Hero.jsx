@@ -2,6 +2,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe, Shield, Wallet, Users, X, Linkedin, ExternalLink, QrCode } from 'lucide-react';
 import mosipLogo from '../../src/assets/mosip.png';
 import vlinderLogo from '../../src/assets/vlinder-title.png'
+import qrcode1 from '../../src/assets/qrcodeS.png'
+import qrcode2 from '../../src/assets/qrcodeD.png'
 import React from 'react';
 
 const DataFlow = () => (
@@ -75,14 +77,14 @@ const Hero = () => {
             role: "Chief Strategic and Revenue Officer",
             linkedin: "https://www.linkedin.com/in/sureshjagannathan/",
             photo: "https://s3.ap-south-1.amazonaws.com/io.vlinder.photos/SureshJ.jpeg", // Placeholder path
-            qr: "../../src/assets/qrcodeS.png"    // Placeholder path
+            qr: qrcode1    // Placeholder path
         },
         {
             name: "Darssini Ramesh",
             role: "Prduct Market Consultant",
             linkedin: "https://in.linkedin.com/in/darssini-ramesh-952220218",
             photo: "/assets/team/darssini.png", // Placeholder path
-            qr: "../../src/assets/qrcodeD.png"   // Placeholder path
+            qr: qrcode2  // Placeholder path
         }
     ];
 
