@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Globe, Shield, Wallet } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Globe, Shield, Wallet, Users, X, Linkedin, ExternalLink, QrCode } from 'lucide-react';
 import mosipLogo from '../../src/assets/mosip.png';
+import vlinderLogo from '../../src/assets/vlinder-title.png'
+import React from 'react';
 
 const DataFlow = () => (
     <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
@@ -66,6 +67,24 @@ const DataFlow = () => (
 
 const Hero = () => {
     const [isMobile, setIsMobile] = React.useState(false);
+    const [isTeamModalOpen, setIsTeamModalOpen] = React.useState(false);
+
+    const teamMembers = [
+        {
+            name: "Suresh Jagannathan",
+            role: "Chief Strategic and Revenue Officer",
+            linkedin: "https://www.linkedin.com/in/sureshjagannathan/",
+            photo: "https://s3.ap-south-1.amazonaws.com/io.vlinder.photos/SureshJ.jpeg", // Placeholder path
+            qr: "../../src/assets/qrcodeS.png"    // Placeholder path
+        },
+        {
+            name: "Darssini Ramesh",
+            role: "Prduct Market Consultant",
+            linkedin: "https://in.linkedin.com/in/darssini-ramesh-952220218",
+            photo: "/assets/team/darssini.png", // Placeholder path
+            qr: "../../src/assets/qrcodeD.png"   // Placeholder path
+        }
+    ];
 
     React.useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -77,36 +96,51 @@ const Hero = () => {
     return (
         <section className="relative min-h-[100vh] flex items-center bg-primary overflow-hidden">
             {/* Integrated Top Banner */}
-            <div className="absolute top-0 left-0 w-full z-20 p-6 md:p-10">
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
-                        <div className="flex items-center gap-3">
-                            <img
-                                src="https://s3.ap-south-1.amazonaws.com/io.vlinder.logos/vlinder-logo.png"
-                                alt="Vlinder Logo"
-                                className="w-10 h-10 md:w-12 md:h-12 object-contain"
-                            />
-                            <div className="text-2xl md:text-3xl font-display font-bold text-white tracking-tighter">Vlinder</div>
+            <div className="absolute top-0 left-0 w-full z-20 p-4 md:p-10 pointer-events-none">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pointer-events-auto">
+                    <div className="flex flex-col gap-3">
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center">
+                                <img
+                                    src={vlinderLogo}
+                                    alt="MOSIP Logo"
+                                    className="h-8 md:h-10 object-contain brightness-110"
+                                />
+                            </div>
+                            <div className="hidden md:block h-8 w-px bg-white/20"></div>
+                            <div className="flex items-center">
+                                <img
+                                    src={mosipLogo}
+                                    alt="MOSIP Logo"
+                                    className="h-8 md:h-10 object-contain brightness-110"
+                                />
+                            </div>
                         </div>
-                        <div className="hidden md:block h-10 w-px bg-white/20"></div> {/* Vertical Divider */}
-                        <div className="flex items-center gap-3">
-                            <img
-                                src={mosipLogo}
-                                alt="MOSIP Logo"
-                                className="h-8 md:h-12 object-contain"
-                            />
-                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="inline-flex items-center px-4 py-1 rounded-full bg-accent/5 border border-accent/20 backdrop-blur-sm w-fit"
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent mr-2 animate-pulse" />
+                            <span className="text-accent font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold">MOSIP Connect 2026</span>
+                        </motion.div>
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                    {/* Connect Team Button - Innovative Floating Style */}
+                    <motion.button
+                        initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className="inline-flex items-center px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 backdrop-blur-md w-fit mt-2 md:mt-0"
+                        whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(45,226,230,0.3)" }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setIsTeamModalOpen(true)}
+                        className="group relative px-6 py-3 bg-white/[0.03] hover:bg-white/[0.08] text-white rounded-full border border-white/10 backdrop-blur-2xl transition-all flex items-center gap-3 shadow-2xl overflow-hidden"
                     >
-                        <span className="w-2 h-2 rounded-full bg-accent mr-3 animate-pulse" />
-                        <span className="text-accent font-mono text-[10px] md:text-sm tracking-widest uppercase font-bold text-center">MOSIP Connect 2026</span>
-                    </motion.div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                        <Users className="w-5 h-5 text-accent group-hover:rotate-12 transition-transform" />
+                        <span className="font-bold tracking-tight text-sm md:text-base">Connect Team</span>
+                        <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                    </motion.button>
                 </div>
             </div>
 
@@ -160,7 +194,7 @@ const Hero = () => {
                 )}
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-45 md:pt-30">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-60 md:pt-40 pb-20">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
                     <motion.div
@@ -244,6 +278,139 @@ const Hero = () => {
                     </motion.div>
                 </div>
             </div>
+            {/* Team Modal - Innovative Fullscreen Glass Version */}
+            <AnimatePresence>
+                {isTeamModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center"
+                    >
+                        <div className="absolute inset-0 bg-primary/40 backdrop-blur-xl transition-opacity duration-300" onClick={() => setIsTeamModalOpen(false)} />
+
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            transition={{
+                                type: "spring",
+                                damping: 25,
+                                stiffness: 300
+                            }}
+                            className="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-6xl md:rounded-[3rem] bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu"
+                        >
+                            {/* Modal Header */}
+                            <div className="sticky top-0 z-30 p-8 flex justify-between items-center bg-gradient-to-b from-minight/80 to-transparent backdrop-blur-md">
+                                <div className="text-left">
+                                    <h2 className="text-2xl md:text-4xl font-display font-bold text-white tracking-tight">The Innovation Team</h2>
+                                    <div className="h-1 w-20 bg-accent mt-2 rounded-full shadow-[0_0_10px_rgba(45,226,230,0.5)]" />
+                                </div>
+                                <button
+                                    onClick={() => setIsTeamModalOpen(false)}
+                                    className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all hover:rotate-90 active:scale-90"
+                                >
+                                    <X className="w-8 h-8" />
+                                </button>
+                            </div>
+
+                            {/* Scrollable Content - Scrollbar Hidden */}
+                            <div className="flex-grow overflow-y-auto px-6 md:px-12 pb-20 pt-4 no-scrollbar">
+                                <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+                                    {teamMembers.map((member, idx) => (
+                                        <motion.div
+                                            key={idx}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                                delay: 0.1 + idx * 0.05,
+                                                duration: 0.4,
+                                                ease: "easeOut"
+                                            }}
+                                            className="group relative transform-gpu"
+                                        >
+                                            <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 md:p-10 transition-all duration-500 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden">
+                                                {/* Decorative background number */}
+                                                <div className="absolute -top-10 -right-10 text-[12rem] font-bold text-white/[0.02] pointer-events-none select-none">
+                                                    0{idx + 1}
+                                                </div>
+
+                                                <div className="relative z-10 w-full">
+                                                    <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
+                                                        {/* Compact Profile Photo */}
+                                                        <div className="relative flex-shrink-0">
+                                                            <div className="absolute inset-0 bg-accent rounded-[2rem] rotate-6 opacity-10 group-hover:rotate-12 transition-transform duration-500" />
+                                                            <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-xl">
+                                                                <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
+                                                                    <Users size={32} className="text-white/10" />
+                                                                </div>
+                                                                <img
+                                                                    src={member.photo}
+                                                                    alt={member.name}
+                                                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                                                    onError={(e) => e.target.style.display = 'none'}
+                                                                />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="text-center md:text-left flex-grow">
+                                                            <h3 className="text-2xl font-display font-bold text-white mb-1">{member.name}</h3>
+                                                            <p className="text-accent font-mono text-[10px] uppercase tracking-[0.2em] mb-6">
+                                                                {member.role}
+                                                            </p>
+
+                                                            <div className="flex flex-col gap-3">
+                                                                {/* LinkedIn Action */}
+                                                                <a
+                                                                    href={member.linkedin}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="w-full flex items-center justify-center md:justify-start gap-4 p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 text-white/70 hover:text-white transition-all group/link"
+                                                                >
+                                                                    <Linkedin size={20} className="group-hover/link:text-accent transition-all" />
+                                                                    <span className="font-bold text-sm">Profile</span>
+                                                                    <ExternalLink size={14} className="opacity-40" />
+                                                                </a>
+
+                                                                {/* Direct QR Display */}
+                                                                <div className="p-4 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center md:justify-start gap-4">
+                                                                    <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-xl p-1.5 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                                                        <img
+                                                                            src={member.qr}
+                                                                            alt="LinkedIn QR"
+                                                                            className="w-full h-full object-contain"
+                                                                            onError={(e) => {
+                                                                                e.target.style.display = 'none';
+                                                                                e.target.nextSibling.style.display = 'flex';
+                                                                            }}
+                                                                        />
+                                                                        <div className="hidden w-full h-full flex flex-col items-center justify-center text-gray-300">
+                                                                            <QrCode size={32} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="text-left">
+                                                                        <div className="text-white font-bold text-xs uppercase tracking-widest mb-1">Scan Connect</div>
+                                                                        <div className="text-[10px] text-white/40 leading-tight">Fast direct access to<br />LinkedIn Profile</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                                <p className="text-gray-500 text-sm text-center mt-12 mb-4">Empowering the world through verifiable trust.</p>
+                            </div>
+
+                            {/* Decorative Elements */}
+                            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
+                            <div className="absolute -top-20 -right-20 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
