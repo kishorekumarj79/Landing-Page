@@ -120,7 +120,7 @@ const Hero = () => {
                         </div>
 
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
+                            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             className="inline-flex items-center px-4 py-1 rounded-full bg-accent/5 border border-accent/20 backdrop-blur-sm w-fit"
                         >
@@ -131,9 +131,9 @@ const Hero = () => {
 
                     {/* Connect Team Button - Innovative Floating Style */}
                     <motion.button
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(45,226,230,0.3)" }}
+                        whileHover={isMobile ? {} : { scale: 1.05, boxShadow: "0 0 30px rgba(45,226,230,0.3)" }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsTeamModalOpen(true)}
                         className="group relative px-6 py-3 bg-white/[0.03] hover:bg-white/[0.08] text-white rounded-full border border-white/10 backdrop-blur-2xl transition-all flex items-center gap-3 shadow-2xl overflow-hidden"
@@ -200,9 +200,9 @@ const Hero = () => {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Text Content */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: isMobile ? 0 : 0.8 }}
                         className="text-left"
                     >
 
@@ -291,10 +291,10 @@ const Hero = () => {
                         <div className="absolute inset-0 bg-primary/40 backdrop-blur-lg transition-opacity duration-300" onClick={() => setIsTeamModalOpen(false)} />
 
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            initial={isMobile ? { opacity: 1, y: 0, scale: 1 } : { scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            transition={{
+                            exit={isMobile ? { opacity: 0 } : { scale: 0.9, opacity: 0, y: 20 }}
+                            transition={isMobile ? { duration: 0 } : {
                                 type: "spring",
                                 damping: 25,
                                 stiffness: 300
@@ -321,9 +321,9 @@ const Hero = () => {
                                     {teamMembers.map((member, idx) => (
                                         <motion.div
                                             key={idx}
-                                            initial={{ opacity: 0, y: 20 }}
+                                            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            transition={{
+                                            transition={isMobile ? { duration: 0 } : {
                                                 delay: 0.1 + idx * 0.05,
                                                 duration: 0.4,
                                                 ease: "easeOut"
