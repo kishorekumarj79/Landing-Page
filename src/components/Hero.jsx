@@ -156,11 +156,11 @@ const Hero = () => {
                 {/* Network Grid Overlay - Simplified on Mobile */}
                 <div className={`absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] ${isMobile ? 'bg-[size:100px_100px]' : 'bg-[size:50px_50px]'} [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]`} />
 
-                {/* Innovative Data Flow - Hidden on small mobile */}
-                {!isMobile && <DataFlow />}
+                {/* Innovative Data Flow - Hidden on small mobile and when modal is open */}
+                {!isMobile && !isTeamModalOpen && <DataFlow />}
 
-                {/* Floating Tech Symbols - Only on Desktop for performance */}
-                {!isMobile && (
+                {/* Floating Tech Symbols - Only on Desktop for performance, hidden when modal is open */}
+                {!isMobile && !isTeamModalOpen && (
                     <>
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -238,20 +238,19 @@ const Hero = () => {
                         </div>
                     </motion.div>
 
-                    {/* Visual Content - Floating Cards with NEAT ORBIT */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative h-[650px] hidden lg:block flex items-center justify-center"
+                        className="relative h-[650px] hidden lg:block flex items-center justify-center transform-gpu"
                     >
                         {/* Central Node */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-secondary/20 rounded-full border border-secondary/50 backdrop-blur-xl flex items-center justify-center z-20 shadow-[0_0_50px_rgba(108,92,231,0.3)]">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-secondary/20 rounded-full border border-secondary/50 backdrop-blur-xl flex items-center justify-center z-20 shadow-[0_0_50px_rgba(108,92,231,0.3)] transform-gpu">
                             <Globe className="w-16 h-16 text-secondary" />
                         </div>
 
                         {/* Orbit Container - Reduced Radius (180px) to prevent going outside */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-dashed border-white/5 animate-[spin_40s_linear_infinite]">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-dashed border-white/5 animate-[spin_40s_linear_infinite] transform-gpu">
                             {/* Orbiting Elements */}
                             {[
                                 { icon: Shield, label: "Trust", subtitle: "Root of Trust", color: "text-accent", bg: "bg-accent/10", border: "border-accent/30", angle: 0 },
@@ -260,12 +259,12 @@ const Hero = () => {
                             ].map((item, index) => (
                                 <div
                                     key={index}
-                                    className="absolute top-1/2 left-1/2 w-44 -ml-22 -mt-10"
+                                    className="absolute top-1/2 left-1/2 w-44 -ml-22 -mt-10 transform-gpu"
                                     style={{
                                         transform: `rotate(${item.angle}deg) translate(200px) rotate(-${item.angle}deg)`
                                     }}
                                 >
-                                    <div className="p-4 rounded-xl bg-minight/90 backdrop-blur-md border border-white/10 shadow-2xl animate-[spin_40s_linear_infinite_reverse]">
+                                    <div className="p-4 rounded-xl bg-minight/90 backdrop-blur-md border border-white/10 shadow-2xl animate-[spin_40s_linear_infinite_reverse] transform-gpu">
                                         <div className="flex items-center gap-3">
                                             <item.icon className={`w-7 h-7 ${item.color}`} />
                                             <div>
@@ -289,7 +288,7 @@ const Hero = () => {
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center"
                     >
-                        <div className="absolute inset-0 bg-primary/40 backdrop-blur-xl transition-opacity duration-300" onClick={() => setIsTeamModalOpen(false)} />
+                        <div className="absolute inset-0 bg-primary/40 backdrop-blur-lg transition-opacity duration-300" onClick={() => setIsTeamModalOpen(false)} />
 
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -300,7 +299,7 @@ const Hero = () => {
                                 damping: 25,
                                 stiffness: 300
                             }}
-                            className="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-6xl md:rounded-[3rem] bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu"
+                            className="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-6xl md:rounded-[3rem] bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform"
                         >
                             {/* Modal Header */}
                             <div className="sticky top-0 z-30 p-8 flex justify-between items-center bg-gradient-to-b from-minight/80 to-transparent backdrop-blur-md">
@@ -331,33 +330,35 @@ const Hero = () => {
                                             }}
                                             className="group relative transform-gpu"
                                         >
-                                            <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 md:p-10 transition-all duration-500 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden">
-                                                {/* Decorative background number */}
-                                                <div className="absolute -top-10 -right-10 text-[12rem] font-bold text-white/[0.02] pointer-events-none select-none">
-                                                    0{idx + 1}
-                                                </div>
+                                            <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 md:p-10 transition-all duration-300 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden transform-gpu">
+                                                {/* Decorative background number - Hidden on mobile for performance */}
+                                                {!isMobile && (
+                                                    <div className="absolute -top-10 -right-10 text-[12rem] font-bold text-white/[0.02] pointer-events-none select-none">
+                                                        0{idx + 1}
+                                                    </div>
+                                                )}
 
                                                 <div className="relative z-10 w-full">
                                                     <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
                                                         {/* Compact Profile Photo */}
                                                         <div className="relative flex-shrink-0">
-                                                            <div className="absolute inset-0 bg-accent rounded-[2rem] rotate-6 opacity-10 group-hover:rotate-12 transition-transform duration-500" />
-                                                            <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-xl">
+                                                            <div className="absolute inset-0 bg-accent rounded-[2rem] rotate-6 opacity-10 group-hover:rotate-12 transition-transform duration-500 transform-gpu" />
+                                                            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-xl transform-gpu">
                                                                 <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
                                                                     <Users size={32} className="text-white/10" />
                                                                 </div>
                                                                 <img
                                                                     src={member.photo}
                                                                     alt={member.name}
-                                                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 transform-gpu"
                                                                     onError={(e) => e.target.style.display = 'none'}
                                                                 />
                                                             </div>
                                                         </div>
 
                                                         <div className="text-center md:text-left flex-grow">
-                                                            <h3 className="text-2xl font-display font-bold text-white mb-1">{member.name}</h3>
-                                                            <p className="text-accent font-mono text-[10px] uppercase tracking-[0.2em] mb-6">
+                                                            <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-1">{member.name}</h3>
+                                                            <p className="text-accent font-mono text-[9px] md:text-[10px] uppercase tracking-[0.2em] mb-4 md:mb-6">
                                                                 {member.role}
                                                             </p>
 
@@ -367,16 +368,16 @@ const Hero = () => {
                                                                     href={member.linkedin}
                                                                     target="_blank"
                                                                     rel="noopener noreferrer"
-                                                                    className="w-full flex items-center justify-center md:justify-start gap-4 p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 text-white/70 hover:text-white transition-all group/link"
+                                                                    className="w-full flex items-center justify-center md:justify-start gap-4 p-3 md:p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 text-white/70 hover:text-white transition-all group/link"
                                                                 >
-                                                                    <Linkedin size={20} className="group-hover/link:text-accent transition-all" />
-                                                                    <span className="font-bold text-sm">Profile</span>
-                                                                    <ExternalLink size={14} className="opacity-40" />
+                                                                    <Linkedin size={18} className="group-hover/link:text-accent transition-all" />
+                                                                    <span className="font-bold text-xs md:text-sm">Profile</span>
+                                                                    <ExternalLink size={12} className="opacity-40" />
                                                                 </a>
 
                                                                 {/* Direct QR Display */}
-                                                                <div className="p-4 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center md:justify-start gap-4">
-                                                                    <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-xl p-1.5 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                                                <div className="p-3 md:p-4 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center md:justify-start gap-4">
+                                                                    <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-xl p-1.5 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                                                                         <img
                                                                             src={member.qr}
                                                                             alt="LinkedIn QR"
@@ -387,12 +388,12 @@ const Hero = () => {
                                                                             }}
                                                                         />
                                                                         <div className="hidden w-full h-full flex flex-col items-center justify-center text-gray-300">
-                                                                            <QrCode size={32} />
+                                                                            <QrCode size={24} />
                                                                         </div>
                                                                     </div>
                                                                     <div className="text-left">
-                                                                        <div className="text-white font-bold text-xs uppercase tracking-widest mb-1">Scan Connect</div>
-                                                                        <div className="text-[10px] text-white/40 leading-tight">Fast direct access to<br />LinkedIn Profile</div>
+                                                                        <div className="text-white font-bold text-[10px] md:text-xs uppercase tracking-widest mb-1">Scan Connect</div>
+                                                                        <div className="text-[9px] md:text-[10px] text-white/40 leading-tight">Fast direct access to<br />LinkedIn Profile</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
