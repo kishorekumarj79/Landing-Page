@@ -102,16 +102,16 @@ const Contact = () => {
                             Build, integrate, and scale digital identity solutions with us.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110">
+                            <a href="http://in.linkedin.com/company/vlinder-io" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110">
                                 <Linkedin size={20} />
                             </a>
-                            <a href="#" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-black hover:text-white transition-all transform hover:scale-110">
+                            <a href="https://github.com/vlinderlabs" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-black hover:text-white transition-all transform hover:scale-110">
                                 <Github size={20} />
                             </a>
-                            <a href="#" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all transform hover:scale-110">
+                            <a href="https://x.com/govlinder" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all transform hover:scale-110">
                                 <Twitter size={20} />
                             </a>
-                            <a href="#" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all transform hover:scale-110">
+                            <a href="mailto:info@vlinder.io" className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all transform hover:scale-110">
                                 <Mail size={20} />
                             </a>
                         </div>
