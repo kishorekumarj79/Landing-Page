@@ -3,75 +3,78 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Globe, Shield, Zap, Fingerprint, Server, Shuffle, Cpu, Layers } from 'lucide-react';
 
+const standards = [
+    {
+        name: "W3C VC",
+        description: "JSON-LD · JWT-VC",
+        icon: Shield,
+        color: "text-blue-400",
+        bg: "bg-blue-500/10",
+        border: "border-blue-500/20"
+    },
+    {
+        name: "mDoc (ISO 18013-5)",
+        description: "Mobile ID · Offline ready",
+        icon: Globe,
+        color: "text-indigo-400",
+        bg: "bg-indigo-500/10",
+        border: "border-indigo-500/20"
+    },
+    {
+        name: "SD-JWT VC",
+        description: "Privacy-preserving credentials",
+        icon: Fingerprint,
+        color: "text-purple-400",
+        bg: "bg-purple-500/10",
+        border: "border-purple-500/20"
+    },
+    {
+        name: "OpenID4VC",
+        description: "Issuance & Presentation",
+        icon: Zap,
+        color: "text-amber-400",
+        bg: "bg-amber-500/10",
+        border: "border-amber-500/20"
+    },
+    {
+        name: "DIDs & DIF",
+        description: "did:key · did:web · did:ebsi",
+        icon: Layers,
+        color: "text-emerald-400",
+        bg: "bg-emerald-500/10",
+        border: "border-emerald-500/20"
+    },
+];
+
+const innovations = [
+    {
+        title: "Secure Key Management",
+        subtitle: "Hardware-backed, KMS & HSM compatible",
+        icon: Cpu,
+        detail: "Robust protection for your most sensitive identity keys."
+    },
+    {
+        title: "Multi-Issuer, Multi-Verifier",
+        subtitle: "Government, enterprise & Web3 ready",
+        icon: Server,
+        detail: "Universal connectivity for any verification scenario."
+    },
+    {
+        title: "Interoperable by Design",
+        subtitle: "EBSI · eIDAS · Enterprise IAM · Wallet ecosystems",
+        icon: Shuffle,
+        detail: "Built to work everywhere standards-based identity lives."
+    }
+];
+
 const Compatibility = () => {
-    const standards = [
-        {
-            name: "W3C VC",
-            description: "JSON-LD · JWT-VC",
-            icon: Shield,
-            color: "text-blue-400",
-            bg: "bg-blue-500/10",
-            border: "border-blue-500/20"
-        },
-        {
-            name: "mDoc (ISO 18013-5)",
-            description: "Mobile ID · Offline ready",
-            icon: Globe,
-            color: "text-indigo-400",
-            bg: "bg-indigo-500/10",
-            border: "border-indigo-500/20"
-        },
-        {
-            name: "SD-JWT VC",
-            description: "Privacy-preserving credentials",
-            icon: Fingerprint,
-            color: "text-purple-400",
-            bg: "bg-purple-500/10",
-            border: "border-purple-500/20"
-        },
-        {
-            name: "OpenID4VC",
-            description: "Issuance & Presentation",
-            icon: Zap,
-            color: "text-amber-400",
-            bg: "bg-amber-500/10",
-            border: "border-amber-500/20"
-        },
-        {
-            name: "DIDs & DIF",
-            description: "did:key · did:web · did:ebsi",
-            icon: Layers,
-            color: "text-emerald-400",
-            bg: "bg-emerald-500/10",
-            border: "border-emerald-500/20"
-        },
-    ];
-
-    const innovations = [
-        {
-            title: "Secure Key Management",
-            subtitle: "Hardware-backed, KMS & HSM compatible",
-            icon: Cpu,
-            detail: "Robust protection for your most sensitive identity keys."
-        },
-        {
-            title: "Multi-Issuer, Multi-Verifier",
-            subtitle: "Government, enterprise & Web3 ready",
-            icon: Server,
-            detail: "Universal connectivity for any verification scenario."
-        },
-        {
-            title: "Interoperable by Design",
-            subtitle: "EBSI · eIDAS · Enterprise IAM · Wallet ecosystems",
-            icon: Shuffle,
-            detail: "Built to work everywhere standards-based identity lives."
-        }
-    ];
-
     const [isMobile, setIsMobile] = React.useState(false);
 
     React.useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+        };
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
@@ -180,6 +183,7 @@ const Compatibility = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
                         className="relative mx-auto w-32 h-32 bg-white rounded-full shadow-[0_0_50px_rgba(108,92,231,0.2)] flex flex-col items-center justify-center border-4 border-secondary/10 z-20"
                     >
                         <div className="absolute inset-0 bg-secondary/20 rounded-full blur-xl animate-pulse" />
@@ -222,10 +226,11 @@ const Compatibility = () => {
                                 key={idx}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="group p-8 rounded-[2.5rem] bg-white border border-slate-100 hover:border-secondary/20 hover:shadow-2xl hover:shadow-secondary/5 transition-all duration-500"
+                                viewport={{ once: true, margin: "-10%" }}
+                                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                                className="group p-8 rounded-[2.5rem] bg-white border border-slate-100 hover:border-secondary/20 hover:shadow-2xl hover:shadow-secondary/5 transition-[transform,shadow,border-color] duration-300 transform-gpu will-change-transform"
                             >
+
                                 <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                                     <item.icon className="w-8 h-8 text-secondary" />
                                 </div>
