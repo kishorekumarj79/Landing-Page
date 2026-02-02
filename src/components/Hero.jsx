@@ -152,7 +152,7 @@ const Hero = () => {
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                         <Users className="w-5 h-5 text-accent group-hover:rotate-12 transition-transform" />
-                        <span className="font-bold tracking-tight text-sm md:text-base">Connect Team</span>
+                        <span className="font-bold tracking-tight text-sm md:text-base">Connect With Our Team</span>
                         <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-accent group-hover:translate-x-1 transition-all" />
                     </motion.button>
                 </div>
