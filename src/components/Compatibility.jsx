@@ -222,6 +222,7 @@ const Compatibility = () => {
                                 key={idx}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
                                 className="group p-8 rounded-[2.5rem] bg-white border border-slate-100 hover:border-secondary/20 hover:shadow-2xl hover:shadow-secondary/5 transition-all duration-500"
                             >
