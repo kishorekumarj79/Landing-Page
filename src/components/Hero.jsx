@@ -95,6 +95,18 @@ const Hero = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    // Lock body scroll when modal is open
+    React.useEffect(() => {
+        if (isTeamModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isTeamModalOpen]);
+
     return (
         <section className="relative min-h-[100vh] flex items-center bg-primary overflow-hidden">
             {/* Integrated Top Banner */}
@@ -150,8 +162,8 @@ const Hero = () => {
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-secondary/20 via-primary to-primary" />
 
-                {/* Simplified Blurs for performance */}
-                <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/5 rounded-full blur-2xl md:blur-3xl" />
+                {/* Simplified Blurs for performance - reduced blur on mobile */}
+                <div className={`absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/5 rounded-full ${isMobile ? 'blur-xl' : 'blur-2xl md:blur-3xl'}`} />
 
                 {/* Network Grid Overlay - Simplified on Mobile */}
                 <div className={`absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] ${isMobile ? 'bg-[size:100px_100px]' : 'bg-[size:50px_50px]'} [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]`} />
@@ -288,7 +300,10 @@ const Hero = () => {
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center"
                     >
-                        <div className="absolute inset-0 bg-primary/40 backdrop-blur-lg transition-opacity duration-300" onClick={() => setIsTeamModalOpen(false)} />
+                        <div
+                            className={`absolute inset-0 bg-primary/60 ${isMobile ? '' : 'backdrop-blur-lg'} transition-opacity duration-300`}
+                            onClick={() => setIsTeamModalOpen(false)}
+                        />
 
                         <motion.div
                             initial={isMobile ? { opacity: 1, y: 0, scale: 1 } : { scale: 0.9, opacity: 0, y: 20 }}
@@ -299,10 +314,10 @@ const Hero = () => {
                                 damping: 25,
                                 stiffness: 300
                             }}
-                            className="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-6xl md:rounded-[3rem] bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform"
+                            className={`relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-6xl md:rounded-[3rem] bg-minight/90 md:bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform ${isMobile ? '' : 'backdrop-blur-xl'}`}
                         >
                             {/* Modal Header */}
-                            <div className="sticky top-0 z-30 p-8 flex justify-between items-center bg-gradient-to-b from-minight/80 to-transparent backdrop-blur-md">
+                            <div className={`sticky top-0 z-30 p-8 flex justify-between items-center bg-gradient-to-b from-minight/95 to-transparent ${isMobile ? '' : 'backdrop-blur-md'}`}>
                                 <div className="text-left">
                                     <h2 className="text-2xl md:text-4xl font-display font-bold text-white tracking-tight">The Innovation Team</h2>
                                     <div className="h-1 w-20 bg-accent mt-2 rounded-full shadow-[0_0_10px_rgba(45,226,230,0.5)]" />
@@ -408,8 +423,9 @@ const Hero = () => {
                             </div>
 
                             {/* Decorative Elements */}
-                            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
-                            <div className="absolute -top-20 -right-20 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+                            {/* Decorative Elements - Reduced blur on mobile */}
+                            <div className={`absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full ${isMobile ? 'blur-[60px]' : 'blur-[100px]'} pointer-events-none`} />
+                            <div className={`absolute -top-20 -right-20 w-64 h-64 bg-secondary/10 rounded-full ${isMobile ? 'blur-[60px]' : 'blur-[100px]'} pointer-events-none`} />
                         </motion.div>
                     </motion.div>
                 )}
