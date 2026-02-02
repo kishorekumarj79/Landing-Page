@@ -105,8 +105,8 @@ const Compatibility = () => {
                 {!isMobile && (
                     <div className="hidden md:flex relative h-[500px] w-full max-w-5xl mx-auto items-center justify-center transform-gpu">
                         {/* Animated Rings Background */}
-                        <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-secondary/20 animate-[spin_40s_linear_infinite]" />
-                        <div className="absolute w-[500px] h-[500px] rounded-full border border-dashed border-gray-200 animate-[spin_60s_linear_infinite_reverse]" />
+                        <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-secondary/20 animate-[spin_40s_linear_infinite] will-change-transform" />
+                        <div className="absolute w-[500px] h-[500px] rounded-full border border-dashed border-gray-200 animate-[spin_60s_linear_infinite_reverse] will-change-transform" />
 
                         {/* Connection Lines Layer */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -158,10 +158,11 @@ const Compatibility = () => {
                                     className="absolute z-10 transform-gpu"
                                     initial={{ x: 0, y: 0, opacity: 0 }}
                                     whileInView={{ x: x, y: y, opacity: 1 }}
-                                    transition={{ duration: 0.8, delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
                                 >
-                                    <div className={`w-40 h-40 ${item.bg} ${item.border} border-2 rounded-[2rem] shadow-xl flex flex-col items-center justify-center backdrop-blur-md hover:scale-110 transition-transform cursor-pointer group bg-white/80 p-4 transform-gpu text-center`}>
-                                        <item.icon className={`w-10 h-10 ${item.color} mb-3 group-hover:rotate-12 transition-transform`} />
+                                    <div className={`w-40 h-40 ${item.bg} ${item.border} border-2 rounded-[2rem] shadow-xl flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300 cursor-pointer group bg-white/90 p-4 transform-gpu text-center will-change-transform`}>
+                                        <item.icon className={`w-10 h-10 ${item.color} mb-3 group-hover:rotate-12 transition-transform duration-300`} />
                                         <h4 className="text-[13px] font-bold text-slate-800 leading-tight mb-1">{item.name}</h4>
                                         <p className="text-[10px] text-slate-500 font-medium leading-tight">
                                             {item.description}
@@ -194,8 +195,8 @@ const Compatibility = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
-                                transition={{ delay: i * 0.1 }}
-                                className={`relative p-6 rounded-3xl ${item.bg} border ${item.border} flex items-center gap-5 backdrop-blur-md transform-gpu`}
+                                transition={{ delay: i * 0.08, ease: "easeOut" }}
+                                className={`relative p-6 rounded-3xl ${item.bg} border ${item.border} flex items-center gap-5 transform-gpu bg-white/90`}
                             >
                                 <div className={`w-14 h-14 rounded-2xl bg-white shadow-inner flex items-center justify-center flex-shrink-0`}>
                                     <item.icon className={`w-7 h-7 ${item.color}`} />
