@@ -297,10 +297,6 @@ const Hero = () => {
                                 </span>
                                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                             </button>
-
-                            <button className="px-8 py-4 bg-white/5 text-white border border-white/10 rounded-full hover:bg-white/10 transition-all font-medium backdrop-blur-sm flex items-center">
-                                Watch Demo
-                            </button>
                         </div>
                     </motion.div>
 
