@@ -5,7 +5,13 @@ import vlinderLogo from '../../src/assets/vlinder-title.png'
 import qrcode1 from '../../src/assets/qrcodeS.png'
 import qrcode2 from '../../src/assets/qrcodeD.png'
 import React from 'react';
-
+import darssini from '../../src/assets/darssini.jpg'
+import mahendra from '../../src/assets/mahendra.png'
+import ajay from '../../src/assets/Ajay.jpeg'
+import shree from '../../src/assets/shree.jpg'
+import subashree from '../../src/assets/subashree.jpeg'
+import kishore from '../../src/assets/Kishore.jpeg'
+import asir from '../../src/assets/asir.jpg'
 const DataFlow = () => (
     <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -73,18 +79,66 @@ const Hero = () => {
 
     const teamMembers = [
         {
-            name: "Suresh Jagannathan",
-            role: "Chief Strategic and Revenue Officer",
-            linkedin: "https://www.linkedin.com/in/sureshjagannathan/",
-            photo: "https://s3.ap-south-1.amazonaws.com/io.vlinder.photos/SureshJ.jpeg", // Placeholder path
-            qr: qrcode1    // Placeholder path
+            name: "Malini Srinivasan",
+            role: "Founder, CEO",
+            linkedin: "https://www.linkedin.com/in/malini-srinivasan-b70300153",
+            photo: "https://s3.ap-south-1.amazonaws.com/io.vlinder.photos/Malini_Srinivasan.jpeg",
+            qr: qrcode1
         },
         {
             name: "Darssini Ramesh",
-            role: "Prduct Market Consultant",
+            role: "Product Market Consultant",
             linkedin: "https://in.linkedin.com/in/darssini-ramesh-952220218",
-            photo: "/assets/team/darssini.png", // Placeholder path
-            qr: qrcode2  // Placeholder path
+            photo: darssini,
+            qr: qrcode2
+        },
+        {
+            name: "Madhusudhan Srinivasan",
+            role: "Engineering and Operations",
+            linkedin: "https://www.linkedin.com/in/sudhansrini/",
+            photo: "https://s3.ap-south-1.amazonaws.com/io.vlinder.photos/madhu.png",
+        },
+        {
+            name: "Suresh Jagannathan",
+            role: "Chief Strategic and Revenue Officer",
+            linkedin: "https://www.linkedin.com/in/sureshjagannathan/",
+            photo: "https://s3.ap-south-1.amazonaws.com/io.vlinder.photos/SureshJ.jpeg",
+        },
+        {
+            name: "Mahendra C",
+            role: "Senior Staff Software Engineer",
+            linkedin: "https://in.linkedin.com/in/mahendra-c-5609a376",
+            photo: mahendra,
+        },
+        {
+            name: "Ajay Raja Pandiyan R",
+            role: "Software Engineer",
+            linkedin: "https://in.linkedin.com/in/ajay-raja-pandiyan-290a3a275",
+            photo: ajay,
+        },
+        {
+            name: "Shree Murugan M",
+            role: "Software Engineer - Blockchain/Backend",
+            linkedin: "https://in.linkedin.com/in/sri-murugan-m-4581b2200",
+            photo: shree,
+        },
+        {
+            name: "Subashree K",
+            role: "UI/UX Designer",
+            linkedin: "https://in.linkedin.com/in/subashree28",
+            photo: subashree,
+        },
+        {
+            name: "Kishore Kumar J",
+            role: "Software Developer Engineer",
+            linkedin: "https://in.linkedin.com/in/kishore-kumar-j-78d",
+            photo: kishore,
+        },
+        {
+            name: "Asir Praveen A",
+            role: "Software Developer Engineer",
+            linkedin: "https://in.linkedin.com/in/asirpraveen",
+            photo: asir,
         }
     ];
 
@@ -314,10 +368,10 @@ const Hero = () => {
                                 damping: 25,
                                 stiffness: 300
                             }}
-                            className={`relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-6xl md:rounded-[3rem] bg-minight/90 md:bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform ${isMobile ? '' : 'backdrop-blur-xl'}`}
+                            className={`relative w-full h-[100dvh] md:h-auto md:max-h-[90vh] md:max-w-7xl md:rounded-[3rem] bg-minight/95 md:bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform ${isMobile ? '' : 'backdrop-blur-xl'}`}
                         >
                             {/* Modal Header */}
-                            <div className={`sticky top-0 z-30 p-8 flex justify-between items-center bg-gradient-to-b from-minight/95 to-transparent ${isMobile ? '' : 'backdrop-blur-md'}`}>
+                            <div className={`sticky top-0 z-30 p-6 md:p-8 flex justify-between items-center bg-minight md:bg-gradient-to-b md:from-minight/95 md:to-transparent ${isMobile ? '' : 'backdrop-blur-md'}`}>
                                 <div className="text-left">
                                     <h2 className="text-2xl md:text-4xl font-display font-bold text-white tracking-tight">The Innovation Team</h2>
                                     <div className="h-1 w-20 bg-accent mt-2 rounded-full shadow-[0_0_10px_rgba(45,226,230,0.5)]" />
@@ -331,8 +385,8 @@ const Hero = () => {
                             </div>
 
                             {/* Scrollable Content - Scrollbar Hidden */}
-                            <div className="flex-grow overflow-y-auto px-6 md:px-12 pb-20 pt-4 no-scrollbar">
-                                <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+                            <div className="flex-grow overflow-y-auto px-4 sm:px-8 md:px-12 pb-20 pt-4 no-scrollbar">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 md:gap-8 max-w-[1440px] mx-auto">
                                     {teamMembers.map((member, idx) => (
                                         <motion.div
                                             key={idx}
@@ -345,7 +399,7 @@ const Hero = () => {
                                             }}
                                             className="group relative transform-gpu"
                                         >
-                                            <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 md:p-10 transition-all duration-300 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden transform-gpu">
+                                            <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 lg:p-8 transition-all duration-300 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden transform-gpu">
                                                 {/* Decorative background number - Hidden on mobile for performance */}
                                                 {!isMobile && (
                                                     <div className="absolute -top-10 -right-10 text-[12rem] font-bold text-white/[0.02] pointer-events-none select-none">
@@ -354,7 +408,7 @@ const Hero = () => {
                                                 )}
 
                                                 <div className="relative z-10 w-full">
-                                                    <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
+                                                    <div className="flex flex-col sm:flex-row gap-6 md:gap-8 items-center sm:items-start">
                                                         {/* Compact Profile Photo */}
                                                         <div className="relative flex-shrink-0">
                                                             <div className="absolute inset-0 bg-accent rounded-[2rem] rotate-6 opacity-10 group-hover:rotate-12 transition-transform duration-500 transform-gpu" />
@@ -365,17 +419,19 @@ const Hero = () => {
                                                                 <img
                                                                     src={member.photo}
                                                                     alt={member.name}
-                                                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 transform-gpu"
+                                                                    className="absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] object-cover object-top rounded-[1.8rem] group-hover:scale-110 transition-transform duration-700 transform-gpu"
                                                                     onError={(e) => e.target.style.display = 'none'}
                                                                 />
                                                             </div>
                                                         </div>
 
-                                                        <div className="text-center md:text-left flex-grow">
-                                                            <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-1">{member.name}</h3>
-                                                            <p className="text-accent font-mono text-[9px] md:text-[10px] uppercase tracking-[0.2em] mb-4 md:mb-6">
-                                                                {member.role}
-                                                            </p>
+                                                        <div className="text-center sm:text-left flex-grow">
+                                                            <div className="mb-4 md:mb-6">
+                                                                <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-1 leading-tight">{member.name}</h3>
+                                                                <p className="text-accent font-mono text-[9px] md:text-[10px] uppercase tracking-[0.2em]">
+                                                                    {member.role}
+                                                                </p>
+                                                            </div>
 
                                                             <div className="flex flex-col gap-3">
                                                                 {/* LinkedIn Action */}
@@ -383,34 +439,36 @@ const Hero = () => {
                                                                     href={member.linkedin}
                                                                     target="_blank"
                                                                     rel="noopener noreferrer"
-                                                                    className="w-full flex items-center justify-center md:justify-start gap-4 p-3 md:p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 text-white/70 hover:text-white transition-all group/link"
+                                                                    className="w-full flex items-center justify-center gap-4 p-3 md:p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 text-white/70 hover:text-white transition-all group/link"
                                                                 >
                                                                     <Linkedin size={18} className="group-hover/link:text-accent transition-all" />
                                                                     <span className="font-bold text-xs md:text-sm">Profile</span>
                                                                     <ExternalLink size={12} className="opacity-40" />
                                                                 </a>
 
-                                                                {/* Direct QR Display */}
-                                                                <div className="p-3 md:p-4 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center md:justify-start gap-4">
-                                                                    <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-xl p-1.5 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                                                                        <img
-                                                                            src={member.qr}
-                                                                            alt="LinkedIn QR"
-                                                                            className="w-full h-full object-contain"
-                                                                            onError={(e) => {
-                                                                                e.target.style.display = 'none';
-                                                                                e.target.nextSibling.style.display = 'flex';
-                                                                            }}
-                                                                        />
-                                                                        <div className="hidden w-full h-full flex flex-col items-center justify-center text-gray-300">
-                                                                            <QrCode size={24} />
+                                                                {/* Direct QR Display - Conditional */}
+                                                                {member.qr && (
+                                                                    <div className="p-3 md:p-4 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center gap-4">
+                                                                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-xl p-1.5 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                                                            <img
+                                                                                src={member.qr}
+                                                                                alt="LinkedIn QR"
+                                                                                className="w-full h-full object-contain"
+                                                                                onError={(e) => {
+                                                                                    e.target.style.display = 'none';
+                                                                                    e.target.nextSibling.style.display = 'flex';
+                                                                                }}
+                                                                            />
+                                                                            <div className="hidden w-full h-full flex flex-col items-center justify-center text-gray-300">
+                                                                                <QrCode size={24} />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="text-left">
+                                                                            <div className="text-white font-bold text-[10px] md:text-xs uppercase tracking-widest mb-1">Scan Connect</div>
+                                                                            <div className="text-[9px] md:text-[10px] text-white/40 leading-tight">Fast direct access to<br />LinkedIn Profile</div>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="text-left">
-                                                                        <div className="text-white font-bold text-[10px] md:text-xs uppercase tracking-widest mb-1">Scan Connect</div>
-                                                                        <div className="text-[9px] md:text-[10px] text-white/40 leading-tight">Fast direct access to<br />LinkedIn Profile</div>
-                                                                    </div>
-                                                                </div>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </div>
