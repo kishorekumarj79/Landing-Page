@@ -129,7 +129,7 @@ const Playground = () => {
 
                     {/* Right: High-Innovation Compact Hub */}
                     <div className="relative">
-                        <div className="bg-zinc-900/50 border border-white/5 rounded-[2.5rem] p-4 md:p-8 backdrop-blur-xl">
+                        <div className={`bg-zinc-900/50 border border-white/5 rounded-[2.5rem] p-4 md:p-8 ${isMobile ? 'backdrop-blur-md' : 'backdrop-blur-xl'}`}>
                             {/* Segmented Controller (Apple-style) */}
                             <div className="flex p-1 bg-black/50 rounded-2xl border border-white/5 mb-8 overflow-hidden">
                                 {steps.map((step) => (
@@ -151,12 +151,12 @@ const Playground = () => {
                             <div className="relative flex flex-col items-center justify-center min-h-[300px]">
                                 {/* Animated Background Glow */}
                                 <motion.div
-                                    animate={{
+                                    animate={!isMobile ? {
                                         scale: [1, 1.1, 1],
                                         opacity: [0.1, 0.2, 0.1]
-                                    }}
+                                    } : { opacity: 0.15 }}
                                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className={`absolute inset-0 rounded-full blur-[60px] ${currentStep.bg}`}
+                                    className={`absolute inset-0 rounded-full blur-[60px] ${currentStep.bg} transform-gpu`}
                                 />
 
                                 <AnimatePresence mode="wait">
@@ -165,7 +165,7 @@ const Playground = () => {
                                         initial={{ opacity: 0, scale: 0.9, x: 20 }}
                                         animate={{ opacity: 1, scale: 1, x: 0 }}
                                         exit={{ opacity: 0, scale: 0.9, x: -20 }}
-                                        className="relative w-full text-center"
+                                        className="relative w-full text-center transform-gpu"
                                     >
                                         {/* Minimal Card UI */}
                                         <div className="max-w-[320px] mx-auto bg-black/40 border border-white/10 rounded-3xl p-6 shadow-2xl overflow-hidden group">
@@ -213,7 +213,7 @@ const Playground = () => {
                                             <motion.div
                                                 animate={{ top: ['-10%', '110%'] }}
                                                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                className={`absolute left-0 right-0 h-px bg-white/20 z-10 shadow-[0_0_10px_white] opacity-20`}
+                                                className={`absolute left-0 right-0 h-px bg-white/20 z-10 shadow-[0_0_10px_white] opacity-20 transform-gpu ${isMobile ? 'hidden' : ''}`}
                                             />
                                         </div>
 
@@ -235,8 +235,8 @@ const Playground = () => {
                         </div>
 
                         {/* Decorative floating bits */}
-                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-[50px] pointer-events-none" />
-                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-[50px] pointer-events-none" />
+                        <div className={`absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full ${isMobile ? 'blur-[30px]' : 'blur-[50px]'} pointer-events-none`} />
+                        <div className={`absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/10 rounded-full ${isMobile ? 'blur-[30px]' : 'blur-[50px]'} pointer-events-none`} />
                     </div>
                 </div>
             </div>
