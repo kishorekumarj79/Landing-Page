@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Smartphone, ShieldCheck, Globe, CreditCard, CheckCircle, ArrowRight, Wallet, Menu, ChevronDown, User, Search, Bell, X } from 'lucide-react';
 
@@ -7,6 +8,7 @@ import injiVideo from '../assets/MOSIP.mp4';
 import klefkiVideo from '../assets/MOSIP ( Klefki) (1).mp4';
 
 const Wallets = () => {
+    const navigate = useNavigate();
     const [selectedVideo, setSelectedVideo] = React.useState(null);
 
     const openModal = (video) => {
@@ -200,13 +202,21 @@ const Wallets = () => {
                             ))}
                         </div>
 
-                        <button
-                            onClick={() => openModal(injiVideo)}
-                            className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors flex items-center justify-center group"
-                        >
-                            Watch Inji Demo
-                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </button>
+                        <div className="grid grid-cols-2 gap-3">
+                            <button
+                                onClick={() => openModal(injiVideo)}
+                                className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors flex items-center justify-center group"
+                            >
+                                Watch Demo
+                            </button>
+                            <button
+                                onClick={() => navigate('/live-demo')}
+                                className="w-full py-4 rounded-xl bg-white border-2 border-blue-100 hover:border-blue-600 text-blue-600 hover:text-blue-700 font-bold transition-colors flex items-center justify-center group"
+                            >
+                                Live Demo
+                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </div>
                     </motion.div>
 
                     {/* Klefki Wallet Column */}
