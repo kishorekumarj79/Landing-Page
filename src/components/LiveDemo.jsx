@@ -88,7 +88,7 @@ const LiveDemo = () => {
         setTimeout(() => setShowToast({ visible: false, message: '' }), 2000);
     }, []);
 
-    const handleGenerateId = () => {
+    const handleGenerateId = React.useCallback(() => {
         const ids = [
             "8267411596", "7483926150", "9264837512", "5837192648", "8142957360",
             "4683029157", "6974283159", "7316584092", "9051746283", "2897465318"
@@ -96,18 +96,18 @@ const LiveDemo = () => {
         const randomId = ids[Math.floor(Math.random() * ids.length)];
         setDemoId(randomId);
         handleCopy(randomId, "New Demo ID");
-    };
+    }, [handleCopy]);
 
-    const triggerConfetti = () => {
+    const triggerConfetti = React.useCallback(() => {
         confetti({
             particleCount: 60,
             spread: 70,
             origin: { y: 0.8 },
             colors: ['#2563EB', '#F43F5E', '#10B981', '#F59E0B']
         });
-    };
+    }, []);
 
-    const steps = [
+    const steps = React.useMemo(() => [
         {
             title: "Download INJI Wallet",
             description: "Get the latest reliable build for the best experience. Use the APK link below.",
@@ -315,7 +315,7 @@ const LiveDemo = () => {
                 </div>
             )
         }
-    ];
+    ], [demoId, handleCopy, handleGenerateId, triggerConfetti]);
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] selection:bg-blue-100">
