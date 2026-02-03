@@ -8,9 +8,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
-const StepCard = ({ step, index, isActive, onCopy, markComplete }) => {
+const StepCard = React.memo(({ step, index, onCopy, markComplete }) => {
     const cardRef = useRef(null);
-    const isInView = useInView(cardRef, { margin: "-20% 0px -20% 0px" });
+    const isInView = useInView(cardRef, { margin: "-20% 0px -20% 0px", amount: 0.5 });
 
     useEffect(() => {
         if (isInView) {
@@ -23,20 +23,20 @@ const StepCard = ({ step, index, isActive, onCopy, markComplete }) => {
             ref={cardRef}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`relative ${isInView ? 'scale-100' : 'scale-95 opacity-80'} transition-all duration-500`}
+            className="relative"
         >
             {/* Connector Line */}
-            {index !== 7 && (
+            {index !== 9 && (
                 <div className="absolute left-[28px] top-16 bottom-[-48px] w-0.5 bg-gradient-to-b from-blue-200 to-transparent md:block hidden" />
             )}
 
-            <div className={`relative bg-white/80 backdrop-blur-xl rounded-3xl border transition-all duration-300 overflow-hidden ${isInView ? 'border-blue-200 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.15)] ring-1 ring-blue-100' : 'border-white/50 shadow-sm'}`}>
+            <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl border border-blue-200 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.15)] ring-1 ring-blue-100 overflow-hidden transition-all duration-300">
                 <div className="p-6 md:p-8 flex gap-6">
                     {/* Icon Bubble */}
                     <div className="hidden md:flex flex-col items-center">
-                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-500 ${isInView ? 'scale-110 rotate-3' : 'scale-100'} bg-gradient-to-br ${step.color}`}>
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg bg-gradient-to-br ${step.color}`}>
                             {step.icon}
                         </div>
                         <div className="mt-2 text-[10px] font-bold text-slate-400">0{index + 1}</div>
@@ -61,7 +61,7 @@ const StepCard = ({ step, index, isActive, onCopy, markComplete }) => {
             </div>
         </motion.div>
     );
-};
+});
 
 const LiveDemo = () => {
     const navigate = useNavigate();
