@@ -458,7 +458,7 @@ const Hero = () => {
                         className="fixed inset-0 z-[100] flex items-center justify-center"
                     >
                         <div
-                            className={`absolute inset-0 bg-primary/60 ${isMobile ? '' : 'backdrop-blur-lg'} transition-opacity duration-300`}
+                            className={`absolute inset-0 bg-primary transition-opacity duration-300`}
                             onClick={() => setIsTeamModalOpen(false)}
                         />
 
@@ -471,10 +471,10 @@ const Hero = () => {
                                 damping: 25,
                                 stiffness: 300
                             }}
-                            className={`relative w-full h-[100dvh] md:h-auto md:max-h-[90vh] md:max-w-7xl md:rounded-[3rem] bg-minight/95 md:bg-minight/60 border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform ${isMobile ? '' : 'backdrop-blur-xl'}`}
+                            className={`relative w-full h-[100dvh] md:h-auto md:max-h-[90vh] md:max-w-7xl md:rounded-[3rem] bg-minight shadow-2xl overflow-hidden flex flex-col transform-gpu will-change-transform`}
                         >
                             {/* Modal Header */}
-                            <div className={`sticky top-0 z-30 p-6 md:p-8 flex justify-between items-center bg-minight md:bg-gradient-to-b md:from-minight/95 md:to-transparent ${isMobile ? '' : 'backdrop-blur-md'}`}>
+                            <div className={`sticky top-0 z-30 p-6 md:p-8 flex justify-between items-center bg-minight`}>
                                 <div className="text-left">
                                     <h2 className="text-2xl md:text-4xl font-display font-bold text-white tracking-tight">The Innovation Team</h2>
                                     <div className="h-1 w-20 bg-accent mt-2 rounded-full shadow-[0_0_10px_rgba(45,226,230,0.5)]" />
@@ -503,12 +503,6 @@ const Hero = () => {
                                             className={`group relative transform-gpu ${idx === teamMembers.length - 1 ? 'lg:col-span-2 lg:mx-auto lg:w-[calc(50%-1rem)] 2xl:col-span-1 2xl:w-full' : ''}`}
                                         >
                                             <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 lg:p-8 transition-all duration-300 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden transform-gpu">
-                                                {/* Decorative background number - Hidden on mobile for performance */}
-                                                {!isMobile && (
-                                                    <div className="absolute -top-10 -right-10 text-[12rem] font-bold text-white/[0.02] pointer-events-none select-none">
-                                                        0{idx + 1}
-                                                    </div>
-                                                )}
 
                                                 <div className="relative z-10 w-full">
                                                     <div className="flex flex-col sm:flex-row gap-6 md:gap-8 items-center sm:items-start">

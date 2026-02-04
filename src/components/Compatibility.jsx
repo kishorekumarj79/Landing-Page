@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Globe, Shield, Zap, Fingerprint, Server, Shuffle, Cpu, Layers } from 'lucide-react';
@@ -26,54 +25,60 @@ const innovations = [
 
 const Compatibility = () => {
     return (
-        <section id="standards" className="py-24 bg-midnight text-center overflow-hidden relative">
-            {/* Dark Tech Mesh Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20" />
+        <section id="standards" className="py-16 sm:py-20 lg:py-24 bg-midnight text-center overflow-hidden relative">
+            {/* Dark Tech Mesh Background - lighter on mobile */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:30px_30px] opacity-10 sm:opacity-20" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="mb-16 transform-gpu"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="mb-12 sm:mb-16"
                 >
-                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono mb-6">
+                    <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs sm:text-sm font-mono mb-6">
                         <Zap size={14} className="mr-2" />
                         Next-Gen Features
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 sm:mb-6 tracking-tight leading-tight">
                         Built for the <br className="md:hidden" />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-accent to-blue-500">
                             Future
                         </span>
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium px-4">
                         Innovative identity infrastructure designed for security, scale, and universal interoperability.
                     </p>
                 </motion.div>
 
-                {/* Innovations Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                {/* Innovations Grid - Simplified animations for mobile */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-left">
                     {innovations.map((item, idx) => (
                         <motion.div
                             key={idx}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-10%" }}
-                            transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
-                            className="group p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.05] transition-all duration-500 transform-gpu will-change-transform shadow-2xl relative overflow-hidden"
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.3, delay: idx * 0.05, ease: "easeOut" }}
+                            className="group p-6 sm:p-8 rounded-2xl sm:rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-accent/30 hover:bg-white/[0.05] transition-colors duration-300 shadow-xl relative overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-accent/20 transition-all duration-500 relative z-10 shadow-inner">
-                                <item.icon className="w-8 h-8 text-accent" />
+                            {/* Gradient overlay - hidden on mobile for performance */}
+                            <div className="hidden sm:block absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 group-hover:bg-accent/20 transition-all duration-300 relative z-10 shadow-inner">
+                                <item.icon className="w-7 h-7 sm:w-8 sm:h-8 text-accent" strokeWidth={2} />
                             </div>
-                            <h3 className="text-2xl font-display font-bold text-white mb-2 leading-tight relative z-10">
+                            
+                            <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-2 leading-tight relative z-10">
                                 {item.title}
                             </h3>
-                            <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-accent font-mono text-[10px] uppercase tracking-[0.2em] mb-4 font-bold relative z-10">
+                            
+                            <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-accent font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-3 sm:mb-4 font-bold relative z-10">
                                 {item.subtitle}
                             </p>
-                            <p className="text-gray-400 text-sm leading-relaxed relative z-10 font-medium">
+                            
+                            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed relative z-10 font-medium">
                                 {item.detail}
                             </p>
                         </motion.div>
@@ -84,10 +89,12 @@ const Compatibility = () => {
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    className="mt-20 text-center max-w-2xl mx-auto"
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-12 sm:mt-16 lg:mt-20 text-center max-w-2xl mx-auto px-4"
                 >
-                    <div className="h-px w-20 bg-white/10 mx-auto mb-8" />
-                    <p className="text-gray-500 text-sm font-medium leading-relaxed italic">
+                    <div className="h-px w-16 sm:w-20 bg-white/10 mx-auto mb-6 sm:mb-8" />
+                    <p className="text-gray-500 text-xs sm:text-sm font-medium leading-relaxed italic">
                         Designed for interoperability across eIDAS 2.0, EBSI, enterprise IAM, and decentralized identity ecosystems.
                     </p>
                 </motion.div>

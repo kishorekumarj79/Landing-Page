@@ -70,7 +70,7 @@ const Playground = () => {
     const currentStep = steps.find(s => s.id === activeTab);
 
     return (
-        <section id="playground" className="py-24 bg-white relative overflow-hidden">
+        <section id="playground" className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden">
             {/* Subtle Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{ 
@@ -94,32 +94,32 @@ const Playground = () => {
                                 Trust Framework
                             </div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-6 tracking-tight leading-[1.1]">
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-6 tracking-tight leading-[1.1]">
                                 The Klefki <br />
                                 Trust Playground
                             </h2>
 
-                            <p className="text-slate-600 text-lg mb-6 max-w-lg leading-[1.7] tracking-tight font-medium">
+                            <p className="text-slate-600 text-base sm:text-lg mb-6 max-w-lg leading-[1.7] tracking-tight font-medium">
                                 Issue, hold, and verify verifiable credentials using open standards and chain-agnostic blockchain anchoring.
                             </p>
 
-                            <p className="text-slate-500 text-sm mb-12 max-w-lg leading-relaxed font-medium tracking-wide italic">
+                            <p className="text-slate-500 text-xs sm:text-sm mb-8 sm:mb-12 max-w-lg leading-relaxed font-medium tracking-wide italic">
                                 Explore the playground to issue sample certificates and experience instant verification.
                             </p>
 
-                            <div className="flex flex-col gap-10">
+                            <div className="flex flex-col gap-8 sm:gap-10">
                                 <a
                                     href="https://klefki-trust-stage.lovable.app/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-fit px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl hover:scale-[1.02] transition-all text-sm flex items-center group shadow-[0_8px_30px_rgb(37,99,235,0.25)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.35)] active:scale-95"
+                                    className="w-full sm:w-fit px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl hover:scale-[1.02] transition-all text-sm flex items-center justify-center group shadow-[0_8px_30px_rgb(37,99,235,0.25)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.35)] active:scale-95"
                                 >
-                                    Explore Live Playground
+                                    Explore Playground
                                     <ArrowUpRight size={18} className="ml-2 group-hover:rotate-45 transition-transform" />
                                 </a>
 
                                 {/* Standards Pillars */}
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-slate-200">
                                     {[
                                         { label: "W3C Standards", icon: Globe, color: "text-emerald-600" },
                                         { label: "Privacy by Design", icon: Lock, color: "text-blue-600" },
@@ -143,12 +143,12 @@ const Playground = () => {
                     <div className="relative">
                         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700 rounded-[2.5rem] p-6 md:p-10 shadow-2xl">
                             {/* Segmented Controller */}
-                            <div className="flex p-1.5 bg-slate-800/50 rounded-2xl border border-slate-700/50 mb-10 overflow-hidden backdrop-blur-sm">
+                            <div className="flex p-1 sm:p-1.5 bg-slate-800/50 rounded-2xl border border-slate-700/50 mb-8 sm:mb-10 overflow-hidden backdrop-blur-sm">
                                 {steps.map((step) => (
                                     <button
                                         key={step.id}
                                         onClick={() => setActiveTab(step.id)}
-                                        className={`flex-1 py-3.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2.5 relative ${
+                                        className={`flex-1 py-2.5 sm:py-3.5 px-2 sm:px-4 rounded-xl text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1.5 sm:gap-2.5 relative ${
                                             activeTab === step.id ? 'text-white' : 'text-gray-300 hover:text-white'
                                         }`}
                                     >
@@ -158,8 +158,9 @@ const Playground = () => {
                                                 className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-600 rounded-xl border border-slate-500/30 shadow-lg" 
                                             />
                                         )}
-                                        <step.icon size={18} className={`relative z-10 ${activeTab === step.id ? 'text-white' : 'text-gray-300'}`} strokeWidth={2.5} />
-                                        <span className="relative z-10">{step.title}</span>
+                                        <step.icon size={isMobile ? 14 : 18} className={`relative z-10 ${activeTab === step.id ? 'text-white' : 'text-gray-300'}`} strokeWidth={2.5} />
+                                        <span className="relative z-10 hidden sm:inline">{step.title}</span>
+                                        <span className="relative z-10 sm:hidden">{step.title.split(' ')[0]}</span>
                                     </button>
                                 ))}
                             </div>
@@ -186,20 +187,20 @@ const Playground = () => {
                                         className="relative w-full text-center transform-gpu"
                                     >
                                         {/* Premium Card UI */}
-                                        <div className="max-w-[340px] mx-auto bg-gradient-to-br from-white via-slate-50 to-white border-2 border-slate-200 rounded-3xl p-7 shadow-2xl overflow-hidden group">
+                                        <div className="max-w-[280px] sm:max-w-[340px] mx-auto bg-gradient-to-br from-white via-slate-50 to-white border-2 border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden group">
                                             {/* Card Top */}
-                                            <div className="flex justify-between items-start mb-8">
-                                                <div className={`p-3 rounded-2xl bg-gradient-to-br ${currentStep.bg} ${currentStep.color} border ${currentStep.border} shadow-md`}>
-                                                    <currentStep.icon size={24} strokeWidth={2.5} />
+                                            <div className="flex justify-between items-start mb-6 sm:mb-8">
+                                                <div className={`p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-gradient-to-br ${currentStep.bg} ${currentStep.color} border ${currentStep.border} shadow-md`}>
+                                                    <currentStep.icon size={isMobile ? 20 : 24} strokeWidth={2.5} />
                                                 </div>
-                                                <div className={`px-3 py-1.5 rounded-xl text-[9px] font-mono font-bold uppercase ${currentStep.bg} ${currentStep.color} border-2 ${currentStep.border} shadow-sm`}>
+                                                <div className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[8px] sm:text-[9px] font-mono font-bold uppercase ${currentStep.bg} ${currentStep.color} border-2 ${currentStep.border} shadow-sm`}>
                                                     {currentStep.badge}
                                                 </div>
                                             </div>
 
                                             {/* Card Body - Progress Bars */}
-                                            <div className="space-y-3.5 mb-10">
-                                                <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                                            <div className="space-y-2.5 sm:space-y-3.5 mb-8 sm:mb-10">
+                                                <div className="h-2 sm:h-2.5 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                                                     <motion.div
                                                         initial={{ width: 0 }}
                                                         animate={{ width: '100%' }}
@@ -207,21 +208,21 @@ const Playground = () => {
                                                         className={`h-full bg-gradient-to-r ${currentStep.accent} shadow-sm`}
                                                     />
                                                 </div>
-                                                <div className="h-2 w-4/5 bg-slate-100 rounded-full border border-slate-200" />
-                                                <div className="h-2 w-3/5 bg-slate-100 rounded-full border border-slate-200" />
+                                                <div className="h-1.5 sm:h-2 w-4/5 bg-slate-100 rounded-full border border-slate-200" />
+                                                <div className="h-1.5 sm:h-2 w-3/5 bg-slate-100 rounded-full border border-slate-200" />
                                             </div>
 
                                             {/* Card Footer */}
-                                            <div className="pt-6 border-t-2 border-slate-200 flex items-center justify-between">
-                                                <div className="flex -space-x-2.5">
-                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-slate-300 to-slate-400 border-2 border-white shadow-md" />
-                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 border-2 border-white shadow-md" />
+                                            <div className="pt-4 sm:pt-6 border-t-2 border-slate-200 flex items-center justify-between">
+                                                <div className="flex -space-x-2">
+                                                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-slate-300 to-slate-400 border-2 border-white shadow-md" />
+                                                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 border-2 border-white shadow-md" />
                                                 </div>
                                                 <div className="text-right">
-                                                    <div className={`text-xs ${currentStep.color} font-bold leading-tight`}>
+                                                    <div className={`text-[10px] sm:text-xs ${currentStep.color} font-bold leading-tight`}>
                                                         {currentStep.encType}
                                                     </div>
-                                                    <div className="text-[9px] text-slate-400 font-mono tracking-[0.2em] uppercase mt-1">
+                                                    <div className="text-[8px] sm:text-[9px] text-slate-400 font-mono tracking-[0.2em] uppercase mt-0.5 sm:mt-1">
                                                         Security Stage {currentStep.version}
                                                     </div>
                                                 </div>
@@ -242,12 +243,12 @@ const Playground = () => {
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: 0.2 }}
-                                            className="mt-10 max-w-[300px] mx-auto text-center"
+                                            className="mt-6 sm:mt-10 max-w-[260px] sm:max-w-[300px] mx-auto text-center"
                                         >
-                                            <h4 className={`font-bold text-sm mb-3 uppercase tracking-widest ${currentStep.color}`}>
+                                            <h4 className={`font-bold text-xs sm:text-sm mb-2 sm:mb-3 uppercase tracking-widest ${currentStep.color}`}>
                                                 {currentStep.title}
                                             </h4>
-                                            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                                            <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed font-medium">
                                                 {currentStep.desc}
                                             </p>
                                         </motion.div>
