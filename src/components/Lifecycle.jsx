@@ -158,12 +158,18 @@ const Lifecycle = () => {
     ];
 
     return (
-        <section id="lifecycle" className="py-24 bg-minight text-white relative overflow-hidden" ref={containerRef}>
+        <section id="lifecycle" className="py-24 bg-primary text-white relative overflow-hidden" ref={containerRef}>
+            {/* Tech Mesh Background */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 pointer-events-none" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-20">
-                    <span className="text-accent font-mono text-sm tracking-wider uppercase mb-4 block">Seamless Flow</span>
-                    <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Social Grant Credential Life Cycle</h2>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono mb-6">
+                        Seamless Flow
+                    </span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 tracking-tight">
+                        Social Grant Credential Life Cycle<br className="hidden md:block" />
+                    </h2>
+                    <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium">
                         Watch how a grant moves from a government form to a real-world transaction in seconds.
                     </p>
                 </div>

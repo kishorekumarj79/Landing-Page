@@ -21,12 +21,12 @@ const ScrollToTop = () => {
 
 const HomePage = () => (
   <>
-    <Hero />
-    <Wallets />
-    <Lifecycle />
-    <Compatibility />
-    <Playground />
-    <Contact />
+    <Hero /> {/* 1. Dark Blue (#0B1C2D) */}
+    <Playground /> {/* 2. Light (#F7F9FC) */}
+    <Compatibility /> {/* 3. Dark Blue (#0B1C2D) */}
+    <Wallets /> {/* 4. Light (#F7F9FC) */}
+    <Lifecycle /> {/* 5. Dark Blue (#0B1C2D/Midnight) */}
+    <Contact /> {/* 6. Light (#F7F9FC) */}
   </>
 );
 

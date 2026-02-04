@@ -28,9 +28,9 @@ const Navbar = () => {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
                             <a href="#" className="text-gray-300 hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                            <a href="#demos" className="text-gray-300 hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Use Cases</a>
-                            <a href="#lifecycle" className="text-gray-300 hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Lifecycle</a>
                             <a href="#playground" className="text-gray-300 hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Playground</a>
+                            <a href="#standards" className="text-gray-300 hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Standards</a>
+                            <a href="#demos" className="text-gray-300 hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Use Cases</a>
                             <a href="#contact" className="bg-secondary/20 hover:bg-secondary/40 text-secondary border border-secondary/50 px-6 py-2 rounded-full text-sm font-medium transition-all hover:shadow-[0_0_15px_rgba(108,92,231,0.3)]">
                                 Connect
                             </a>
@@ -58,9 +58,9 @@ const Navbar = () => {
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-accent">Home</a>
-                            <a href="#demos" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent">Use Cases</a>
-                            <a href="#lifecycle" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent">Lifecycle</a>
                             <a href="#playground" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent">Playground</a>
+                            <a href="#standards" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent">Standards</a>
+                            <a href="#demos" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-accent">Use Cases</a>
                             <a href="#contact" className="block px-3 py-2 rounded-md text-base font-medium text-secondary">Connect</a>
                         </div>
                     </motion.div>

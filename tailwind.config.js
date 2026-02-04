@@ -8,7 +8,7 @@ export default {
         extend: {
             colors: {
                 primary: "#0B1C2D", // Midnight Blue
-                minight: "#0B1C2D",
+                midnight: "#0B1C2D",
                 accent: "#2DE2E6", // Electric Cyan
                 secondary: "#6C5CE7", // Royal Purple
                 highlight: "#00BFA6", // Soft Teal

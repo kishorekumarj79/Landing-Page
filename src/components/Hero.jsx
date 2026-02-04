@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Globe, Shield, Wallet, Users, X, Linkedin, ExternalLink, QrCode } from 'lucide-react';
+import { ArrowRight, Globe, Shield, Wallet, Users, X, Linkedin, ExternalLink, QrCode, Cpu, Server, Shuffle, Zap, Fingerprint, Layers, Mail } from 'lucide-react';
 import mosipLogo from '../../src/assets/mosip.png';
 import vlinderLogo from '../../src/assets/vlinder-title.png'
 import qrcode1 from '../../src/assets/qrcodeS.png'
@@ -72,6 +72,49 @@ const DataFlow = () => (
         </svg>
     </div>
 );
+
+const standards = [
+    {
+        name: "W3C VC",
+        description: "JSON-LD · JWT-VC",
+        icon: Shield,
+        color: "text-blue-400",
+        bg: "bg-blue-500/10",
+        border: "border-blue-500/20"
+    },
+    {
+        name: "mDoc (ISO 18013-5)",
+        description: "Mobile ID · Offline ready",
+        icon: Globe,
+        color: "text-indigo-400",
+        bg: "bg-indigo-500/10",
+        border: "border-indigo-500/20"
+    },
+    {
+        name: "SD-JWT VC",
+        description: "Privacy-preserving credentials",
+        icon: Fingerprint,
+        color: "text-purple-400",
+        bg: "bg-purple-500/10",
+        border: "border-purple-500/20"
+    },
+    {
+        name: "OpenID4VC",
+        description: "Issuance & Presentation",
+        icon: Zap,
+        color: "text-amber-400",
+        bg: "bg-amber-500/10",
+        border: "border-amber-500/20"
+    },
+    {
+        name: "DIDs & DIF",
+        description: "did:key · did:web · did:ebsi",
+        icon: Layers,
+        color: "text-emerald-400",
+        bg: "bg-emerald-500/10",
+        border: "border-emerald-500/20"
+    },
+];
 
 const Hero = () => {
     const [isMobile, setIsMobile] = React.useState(false);
@@ -189,7 +232,32 @@ const Hero = () => {
                         </motion.div>
                     </div>
 
-                    {/* Connect Team Button - Innovative Floating Style */}
+                    {/* Innovative Navigation Dock - Integrated into Header */}
+                    <nav className="flex items-center gap-2 p-1.5 bg-slate-900/95 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-xl group hover:border-accent/40 transition-all duration-500">
+                        {[
+                            { name: 'Ecosystem', id: 'demos', icon: Wallet },
+                            { name: 'Life Cycle', id: 'lifecycle', icon: Shuffle },
+                            { name: 'Contact', id: 'contact', icon: Mail }
+                        ].map((link) => (
+                            <button
+                                key={link.id}
+                                onClick={() => {
+                                    document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="flex items-center gap-2 px-3 py-2.5 rounded-2xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group/btn relative"
+                            >
+                                <link.icon size={16} className="group-hover/btn:text-accent group-hover/btn:scale-110 transition-all" />
+                                <span className="text-[11px] font-bold tracking-tight hidden xl:block">{link.name}</span>
+
+                                {/* Tooltip for Mobile/Laptop */}
+                                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-accent text-primary text-[10px] font-bold rounded shadow-lg opacity-0 group-hover/btn:opacity-100 xl:hidden transition-opacity">
+                                    {link.name}
+                                </span>
+                            </button>
+                        ))}
+                    </nav>
+
+                    {/* Connect Team Button - Restored Standalone Style */}
                     <motion.button
                         initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -256,8 +324,8 @@ const Hero = () => {
                 )}
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-60 md:pt-40 pb-20">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-60 md:pt-48 pb-20">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
                     {/* Text Content */}
                     <motion.div
                         initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
@@ -265,18 +333,20 @@ const Hero = () => {
                         transition={{ duration: isMobile ? 0 : 0.8 }}
                         className="text-left"
                     >
-
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold leading-[1.1] text-white mb-6">
-                            Powering the <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-highlight to-secondary px-1">
-                                Next Generation
-                            </span> <br className="hidden sm:block" />
-                            of Digital Identity
+                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono mb-6">
+                            <Zap size={14} className="mr-2" />
+                            Universal Interoperability
+                        </div>
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] text-white mb-8 tracking-tight">
+                            One Wallet. <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-accent to-blue-500">
+                                Every Credential
+                            </span> <br />
+                            Standard.
                         </h1>
 
-                        <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl leading-relaxed">
-                            Discover how Vlinder enables real-world digital identity and social welfare use cases using MOSIP, Inji Wallet, Klefki Wallet, and interoperable verifiable credentials.
-                        </p>
+                        <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed font-medium">
+                            Powering the next generation of secure, interoperable digital identity - built on open standards. </p>
 
                         <div className="flex flex-wrap gap-4">
                             <button
@@ -286,7 +356,7 @@ const Hero = () => {
                                 className="group relative px-8 py-4 bg-accent text-primary font-bold rounded-full overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(45,226,230,0.4)]"
                             >
                                 <span className="relative z-10 flex items-center">
-                                    Explore Use Cases
+                                    Explore Playground
                                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </span>
                                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -294,48 +364,91 @@ const Hero = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative h-[650px] hidden lg:block flex items-center justify-center transform-gpu"
-                    >
-                        {/* Central Node */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-secondary/20 rounded-full border border-secondary/50 backdrop-blur-xl flex items-center justify-center z-20 shadow-[0_0_50px_rgba(108,92,231,0.3)] transform-gpu">
-                            <Globe className="w-16 h-16 text-secondary" />
+                    {/* Circular Orbit for Standards (Replacement for Grid) */}
+                    <div className="relative h-[550px] hidden lg:flex items-center justify-center transform-gpu">
+                        {/* Animated Rings */}
+                        <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]" />
+                        <div className="absolute w-[450px] h-[450px] rounded-full border border-dashed border-white/5 animate-[spin_60s_linear_infinite_reverse]" />
+
+                        {/* Connection Lines (Static SVG) */}
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                            {standards.map((_, index) => {
+                                const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
+                                const x2 = 50 + (Math.cos(angle) * 35);
+                                const y2 = 50 + (Math.sin(angle) * 35);
+                                return (
+                                    <line
+                                        key={index}
+                                        x1="50%" y1="50%"
+                                        x2={`${x2}%`} y2={`${y2}%`}
+                                        stroke="rgba(45, 226, 230, 0.1)"
+                                        strokeWidth="1"
+                                        strokeDasharray="4 4"
+                                    />
+                                );
+                            })}
+                        </svg>
+
+                        {/* Central Hub */}
+                        <div className="relative z-20">
+                            <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse" />
+                            <div className="w-28 h-28 bg-primary/80 backdrop-blur-xl rounded-full border border-accent/30 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(45,226,230,0.2)]">
+                                <div className="text-2xl font-bold font-display text-accent tracking-tighter">Klefki</div>
+                            </div>
                         </div>
 
-                        {/* Orbit Container - Reduced Radius (180px) to prevent going outside */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-dashed border-white/5 animate-[spin_40s_linear_infinite] transform-gpu">
-                            {/* Orbiting Elements */}
-                            {[
-                                { icon: Shield, label: "Trust", subtitle: "Root of Trust", color: "text-accent", bg: "bg-accent/10", border: "border-accent/30", angle: 0 },
-                                { icon: Wallet, label: "Wallet", subtitle: "Secure Custody", color: "text-highlight", bg: "bg-highlight/10", border: "border-highlight/30", angle: 120 },
-                                { icon: Globe, label: "Identity", subtitle: "Global Standard", color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-400/30", angle: 240 },
-                            ].map((item, index) => (
-                                <div
+                        {/* Orbiting Standards Cards */}
+                        {standards.map((item, index) => {
+                            const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
+                            const radius = 220;
+                            const x = Math.cos(angle) * radius;
+                            const y = Math.sin(angle) * radius;
+
+                            return (
+                                <motion.div
                                     key={index}
-                                    className="absolute top-1/2 left-1/2 w-44 -ml-22 -mt-10 transform-gpu"
-                                    style={{
-                                        transform: `rotate(${item.angle}deg) translate(200px) rotate(-${item.angle}deg)`
-                                    }}
+                                    className="absolute z-10 transform-gpu"
+                                    initial={{ x: 0, y: 0, opacity: 0 }}
+                                    animate={{ x: x, y: y, opacity: 1 }}
+                                    transition={{ duration: 0.8, delay: 0.5 + index * 0.1, ease: "easeOut" }}
                                 >
-                                    <div className="p-4 rounded-xl bg-minight/90 backdrop-blur-md border border-white/10 shadow-2xl animate-[spin_40s_linear_infinite_reverse] transform-gpu">
-                                        <div className="flex items-center gap-3">
-                                            <item.icon className={`w-7 h-7 ${item.color}`} />
-                                            <div>
-                                                <div className={`font-bold text-sm ${item.color}`}>{item.label}</div>
-                                                <div className="text-[10px] text-gray-400 uppercase tracking-tighter">{item.subtitle}</div>
-                                            </div>
+                                    <div className={`p-5 rounded-[2.5rem] bg-white/[0.03] border ${item.border} backdrop-blur-xl shadow-2xl hover:bg-white/10 transition-all duration-500 transform-gpu group cursor-pointer text-center w-40 h-40 flex flex-col items-center justify-center border-white/10`}>
+                                        <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500 shadow-inner overflow-hidden relative`}>
+                                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <item.icon className="w-6 h-6 text-accent relative z-10" />
                                         </div>
+                                        <h4 className="text-xs font-bold text-white mb-1.5 leading-tight tracking-tight uppercase">{item.name}</h4>
+                                        <p className="text-[10px] text-gray-400 font-medium leading-tight max-w-[80px]">{item.description}</p>
                                     </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Mobile Standards Grid */}
+                    <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {standards.map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 + i * 0.1 }}
+                                className={`relative p-6 rounded-3xl bg-white/[0.03] border ${item.border} flex items-center gap-5 backdrop-blur-sm`}
+                            >
+                                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <item.icon className="w-6 h-6 text-accent" />
                                 </div>
-                            ))}
-                        </div>
-                    </motion.div>
+                                <div className="text-left">
+                                    <h4 className="text-sm font-bold text-white mb-1">{item.name}</h4>
+                                    <p className="text-[10px] text-gray-400 font-medium">{item.description}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
             {/* Team Modal - Innovative Fullscreen Glass Version */}
+
             <AnimatePresence>
                 {isTeamModalOpen && (
                     <motion.div
@@ -478,7 +591,7 @@ const Hero = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </section>
+        </section >
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Building2, Wallet, ShieldCheck, Cpu, CheckCircle2, QrCode, Smartphone, Shield, Lock, Globe, Zap } from 'lucide-react';
+import { ArrowUpRight, Building2, Wallet, ShieldCheck, Cpu, Globe, Lock, Zap } from 'lucide-react';
 
 const Playground = () => {
     const [activeTab, setActiveTab] = useState('issuer');
@@ -17,81 +17,93 @@ const Playground = () => {
         {
             id: 'issuer',
             title: "Authority Portal",
-            role: "Issuer",
+            role: "Authority Portal",
             desc: "Create a W3C-compliant credential anchored to Blockchain.",
             icon: Building2,
-            color: "text-green-400",
-            bg: "bg-green-400/10",
-            border: "border-green-400/30",
-            badge: "Signed",
-            dot: "bg-green-400",
-            version: "v1",
-            encType: "Lock the credential securely."
+            color: "text-emerald-600",
+            accent: "from-emerald-500 to-emerald-600",
+            bg: "bg-emerald-50",
+            bgDark: "bg-emerald-500/10",
+            border: "border-emerald-200",
+            badge: "SIGNED",
+            dot: "bg-emerald-500",
+            version: "V1",
+            encType: "Lock the credential securely.",
+            gradientBg: "from-emerald-500/5 to-emerald-600/5"
         },
         {
             id: 'holder',
             title: "Citizen Wallet",
-            role: "Holder",
+            role: "Citizen Wallet",
             desc: "Securely hold and present your verifiable credentials.",
             icon: Wallet,
-            color: "text-blue-400",
-            bg: "bg-blue-400/10",
-            border: "border-blue-400/30",
-            badge: "Secured",
-            dot: "bg-blue-400",
-            version: "vh",
-            encType: "Lock and label the credential."
+            color: "text-blue-600",
+            accent: "from-blue-500 to-blue-600",
+            bg: "bg-blue-50",
+            bgDark: "bg-blue-500/10",
+            border: "border-blue-200",
+            badge: "SECURED",
+            dot: "bg-blue-500",
+            version: "VH",
+            encType: "End-to-End Encrypted",
+            gradientBg: "from-blue-500/5 to-blue-600/5"
         },
         {
             id: 'verifier',
             title: "Service Provider",
-            role: "Verifier",
+            role: "Service Provider",
             desc: "Request and verify credentials with selective disclosure.",
             icon: ShieldCheck,
-            color: "text-purple-400",
-            bg: "bg-purple-400/10",
-            border: "border-purple-400/30",
-            badge: "Verified",
-            dot: "bg-purple-400",
-            version: "vv",
-            encType: "Lock, label, and verify authenticity."
+            color: "text-purple-600",
+            accent: "from-purple-500 to-purple-600",
+            bg: "bg-purple-50",
+            bgDark: "bg-purple-500/10",
+            border: "border-purple-200",
+            badge: "VERIFIED",
+            dot: "bg-purple-500",
+            version: "VV",
+            encType: "Instant Verification",
+            gradientBg: "from-purple-500/5 to-purple-600/5"
         }
     ];
 
     const currentStep = steps.find(s => s.id === activeTab);
 
     return (
-        <section id="playground" className="py-20 bg-black relative overflow-hidden">
-            {/* Minimal Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]" />
+        <section id="playground" className="py-24 bg-white relative overflow-hidden">
+            {/* Subtle Grid Pattern */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                style={{ 
+                    backgroundImage: 'radial-gradient(circle, #1A1F2E 1px, transparent 1px)', 
+                    backgroundSize: '32px 32px' 
+                }} 
+            />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-                    {/* Left: Compact Content */}
+                    {/* Left: Content */}
                     <div className="text-left">
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                         >
-                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-[10px] font-mono tracking-widest uppercase mb-6">
-                                <Cpu size={12} className="mr-2" />
+                            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200 text-slate-600 text-[10px] font-bold tracking-[0.15em] uppercase mb-6 shadow-sm">
+                                <Cpu size={13} className="mr-2 text-blue-600" />
                                 Trust Framework
                             </div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-6 tracking-tight leading-[1.1]">
                                 The Klefki <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-                                    Trust Playground
-                                </span>
+                                Trust Playground
                             </h2>
 
-                            <p className="text-gray-400 text-base md:text-lg mb-4 max-w-lg leading-relaxed">
+                            <p className="text-slate-600 text-lg mb-6 max-w-lg leading-[1.7] tracking-tight font-medium">
                                 Issue, hold, and verify verifiable credentials using open standards and chain-agnostic blockchain anchoring.
                             </p>
 
-                            <p className="text-gray-500 text-sm md:text-base mb-10 max-w-lg leading-relaxed italic">
+                            <p className="text-slate-500 text-sm mb-12 max-w-lg leading-relaxed font-medium tracking-wide italic">
                                 Explore the playground to issue sample certificates and experience instant verification.
                             </p>
 
@@ -100,24 +112,24 @@ const Playground = () => {
                                     href="https://klefki-trust-stage.lovable.app/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-fit px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all text-sm flex items-center group shadow-xl"
+                                    className="w-fit px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl hover:scale-[1.02] transition-all text-sm flex items-center group shadow-[0_8px_30px_rgb(37,99,235,0.25)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.35)] active:scale-95"
                                 >
-                                    Explore Playground
+                                    Explore Live Playground
                                     <ArrowUpRight size={18} className="ml-2 group-hover:rotate-45 transition-transform" />
                                 </a>
 
                                 {/* Standards Pillars */}
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-white/5">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
                                     {[
-                                        { label: "W3C Standards", icon: Globe },
-                                        { label: "Privacy by Design", icon: Lock },
-                                        { label: "Chain Agnostic", icon: Zap }
+                                        { label: "W3C Standards", icon: Globe, color: "text-emerald-600" },
+                                        { label: "Privacy by Design", icon: Lock, color: "text-blue-600" },
+                                        { label: "Chain Agnostic", icon: Zap, color: "text-purple-600" }
                                     ].map((p, i) => (
                                         <div key={i} className="flex items-center gap-3 group/pillar">
-                                            <div className="p-2 rounded-lg bg-white/5 text-gray-400 group-hover/pillar:text-white transition-colors">
-                                                <p.icon size={14} />
+                                            <div className={`p-2.5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 ${p.color} group-hover/pillar:scale-110 transition-all shadow-sm`}>
+                                                <p.icon size={16} strokeWidth={2.5} />
                                             </div>
-                                            <span className="text-[10px] md:text-xs font-medium text-gray-500 group-hover/pillar:text-gray-300 transition-colors tracking-wide">
+                                            <span className="text-[11px] md:text-xs font-semibold text-slate-600 group-hover/pillar:text-slate-900 transition-colors tracking-wide">
                                                 {p.label}
                                             </span>
                                         </div>
@@ -127,94 +139,102 @@ const Playground = () => {
                         </motion.div>
                     </div>
 
-                    {/* Right: High-Innovation Compact Hub */}
+                    {/* Right: Interactive Hub */}
                     <div className="relative">
-                        <div className={`bg-zinc-900/50 border border-white/5 rounded-[2.5rem] p-4 md:p-8 ${isMobile ? 'backdrop-blur-md' : 'backdrop-blur-xl'}`}>
-                            {/* Segmented Controller (Apple-style) */}
-                            <div className="flex p-1 bg-black/50 rounded-2xl border border-white/5 mb-8 overflow-hidden">
+                        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700 rounded-[2.5rem] p-6 md:p-10 shadow-2xl">
+                            {/* Segmented Controller */}
+                            <div className="flex p-1.5 bg-slate-800/50 rounded-2xl border border-slate-700/50 mb-10 overflow-hidden backdrop-blur-sm">
                                 {steps.map((step) => (
                                     <button
                                         key={step.id}
                                         onClick={() => setActiveTab(step.id)}
-                                        className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 relative ${activeTab === step.id ? 'text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                                        className={`flex-1 py-3.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2.5 relative ${
+                                            activeTab === step.id ? 'text-white' : 'text-gray-300 hover:text-white'
+                                        }`}
                                     >
                                         {activeTab === step.id && (
-                                            <motion.div layoutId="tab-bg" className="absolute inset-0 bg-white/5 rounded-xl border border-white/10" />
+                                            <motion.div 
+                                                layoutId="tab-bg" 
+                                                className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-600 rounded-xl border border-slate-500/30 shadow-lg" 
+                                            />
                                         )}
-                                        <step.icon size={14} className={activeTab === step.id ? step.color : 'text-gray-600'} />
+                                        <step.icon size={18} className={`relative z-10 ${activeTab === step.id ? 'text-white' : 'text-gray-300'}`} strokeWidth={2.5} />
                                         <span className="relative z-10">{step.title}</span>
                                     </button>
                                 ))}
                             </div>
 
                             {/* Hub Display */}
-                            <div className="relative flex flex-col items-center justify-center min-h-[300px]">
+                            <div className="relative flex flex-col items-center justify-center min-h-[320px]">
                                 {/* Animated Background Glow */}
                                 <motion.div
                                     animate={!isMobile ? {
-                                        scale: [1, 1.1, 1],
-                                        opacity: [0.1, 0.2, 0.1]
-                                    } : { opacity: 0.15 }}
+                                        scale: [1, 1.15, 1],
+                                        opacity: [0.15, 0.25, 0.15]
+                                    } : { opacity: 0.2 }}
                                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className={`absolute inset-0 rounded-full blur-[60px] ${currentStep.bg} transform-gpu`}
+                                    className={`absolute inset-0 rounded-full blur-[80px] ${currentStep.bgDark} transform-gpu`}
                                 />
 
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeTab}
-                                        initial={{ opacity: 0, scale: 0.9, x: 20 }}
-                                        animate={{ opacity: 1, scale: 1, x: 0 }}
-                                        exit={{ opacity: 0, scale: 0.9, x: -20 }}
+                                        initial={{ opacity: 0, scale: 0.92, y: 10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.92, y: -10 }}
+                                        transition={{ duration: 0.3 }}
                                         className="relative w-full text-center transform-gpu"
                                     >
-                                        {/* Minimal Card UI */}
-                                        <div className="max-w-[320px] mx-auto bg-black/40 border border-white/10 rounded-3xl p-6 shadow-2xl overflow-hidden group">
+                                        {/* Premium Card UI */}
+                                        <div className="max-w-[340px] mx-auto bg-gradient-to-br from-white via-slate-50 to-white border-2 border-slate-200 rounded-3xl p-7 shadow-2xl overflow-hidden group">
                                             {/* Card Top */}
-                                            <div className="flex justify-between items-start mb-10">
-                                                <div className={`p-2 rounded-xl ${currentStep.bg} ${currentStep.color}`}>
-                                                    <currentStep.icon size={20} />
+                                            <div className="flex justify-between items-start mb-8">
+                                                <div className={`p-3 rounded-2xl bg-gradient-to-br ${currentStep.bg} ${currentStep.color} border ${currentStep.border} shadow-md`}>
+                                                    <currentStep.icon size={24} strokeWidth={2.5} />
                                                 </div>
-                                                <div className={`px-2 py-1 rounded-md text-[8px] font-mono font-bold uppercase ${currentStep.bg} ${currentStep.color} border ${currentStep.border}`}>
+                                                <div className={`px-3 py-1.5 rounded-xl text-[9px] font-mono font-bold uppercase ${currentStep.bg} ${currentStep.color} border-2 ${currentStep.border} shadow-sm`}>
                                                     {currentStep.badge}
                                                 </div>
                                             </div>
 
-                                            {/* Card Body */}
-                                            <div className="space-y-3 mb-8">
-                                                <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                                            {/* Card Body - Progress Bars */}
+                                            <div className="space-y-3.5 mb-10">
+                                                <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                                                     <motion.div
                                                         initial={{ width: 0 }}
                                                         animate={{ width: '100%' }}
-                                                        transition={{ duration: 1 }}
-                                                        className={`h-full bg-gradient-to-r ${currentStep.id === 'issuer' ? 'from-green-500 to-emerald-400' : currentStep.id === 'holder' ? 'from-blue-500 to-indigo-400' : 'from-purple-500 to-fuchsia-400'}`}
+                                                        transition={{ duration: 1, ease: "easeOut" }}
+                                                        className={`h-full bg-gradient-to-r ${currentStep.accent} shadow-sm`}
                                                     />
                                                 </div>
-                                                <div className="h-1.5 w-3/4 bg-white/5 rounded-full" />
-                                                <div className="h-1.5 w-1/2 bg-white/5 rounded-full" />
+                                                <div className="h-2 w-4/5 bg-slate-100 rounded-full border border-slate-200" />
+                                                <div className="h-2 w-3/5 bg-slate-100 rounded-full border border-slate-200" />
                                             </div>
 
                                             {/* Card Footer */}
-                                            <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                                                <div className="flex -space-x-2">
-                                                    <div className="w-5 h-5 rounded-full bg-zinc-800 border-2 border-black shadow-[0_0_10px_rgba(0,0,0,0.5)]" />
-                                                    <div className="w-5 h-5 rounded-full bg-zinc-700 border-2 border-black shadow-[0_0_10px_rgba(0,0,0,0.5)]" />
+                                            <div className="pt-6 border-t-2 border-slate-200 flex items-center justify-between">
+                                                <div className="flex -space-x-2.5">
+                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-slate-300 to-slate-400 border-2 border-white shadow-md" />
+                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 border-2 border-white shadow-md" />
                                                 </div>
                                                 <div className="text-right">
-                                                    <div className={`text-[10px] ${currentStep.color} font-bold leading-tight`}>
+                                                    <div className={`text-xs ${currentStep.color} font-bold leading-tight`}>
                                                         {currentStep.encType}
                                                     </div>
-                                                    <div className="text-[9px] text-white/30 font-mono tracking-[0.2em] uppercase mt-0.5">
+                                                    <div className="text-[9px] text-slate-400 font-mono tracking-[0.2em] uppercase mt-1">
                                                         Security Stage {currentStep.version}
                                                     </div>
                                                 </div>
                                             </div>
 
                                             {/* Scan Beam Effect */}
-                                            <motion.div
-                                                animate={{ top: ['-10%', '110%'] }}
-                                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                className={`absolute left-0 right-0 h-px bg-white/20 z-10 shadow-[0_0_10px_white] opacity-20 transform-gpu ${isMobile ? 'hidden' : ''}`}
-                                            />
+                                            {!isMobile && (
+                                                <motion.div
+                                                    animate={{ top: ['-10%', '110%'] }}
+                                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                                    className={`absolute left-0 right-0 h-[2px] bg-gradient-to-r ${currentStep.accent} z-10 shadow-lg opacity-30 transform-gpu`}
+                                                />
+                                            )}
                                         </div>
 
                                         {/* Description Below Card */}
@@ -222,10 +242,12 @@ const Playground = () => {
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: 0.2 }}
-                                            className="mt-8 max-w-[280px] mx-auto text-center"
+                                            className="mt-10 max-w-[300px] mx-auto text-center"
                                         >
-                                            <h4 className={`font-bold text-sm mb-2 uppercase tracking-widest ${currentStep.color}`}>{currentStep.title}</h4>
-                                            <p className="text-xs text-gray-500 leading-relaxed font-medium">
+                                            <h4 className={`font-bold text-sm mb-3 uppercase tracking-widest ${currentStep.color}`}>
+                                                {currentStep.title}
+                                            </h4>
+                                            <p className="text-xs text-slate-500 leading-relaxed font-medium">
                                                 {currentStep.desc}
                                             </p>
                                         </motion.div>
@@ -234,9 +256,9 @@ const Playground = () => {
                             </div>
                         </div>
 
-                        {/* Decorative floating bits */}
-                        <div className={`absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full ${isMobile ? 'blur-[30px]' : 'blur-[50px]'} pointer-events-none`} />
-                        <div className={`absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/10 rounded-full ${isMobile ? 'blur-[30px]' : 'blur-[50px]'} pointer-events-none`} />
+                        {/* Decorative floating orbs */}
+                        <div className={`absolute -top-12 -right-12 w-40 h-40 bg-gradient-to-br from-emerald-200/30 to-emerald-300/20 rounded-full ${isMobile ? 'blur-[40px]' : 'blur-[60px]'} pointer-events-none`} />
+                        <div className={`absolute -bottom-12 -left-12 w-40 h-40 bg-gradient-to-br from-blue-200/30 to-blue-300/20 rounded-full ${isMobile ? 'blur-[40px]' : 'blur-[60px]'} pointer-events-none`} />
                     </div>
                 </div>
             </div>

@@ -81,18 +81,27 @@ const Wallets = () => {
                 )}
             </AnimatePresence>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12 md:mb-20">
+                <div className="text-center mb-16 md:mb-24">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-mono tracking-widest uppercase mb-8"
+                    >
+                        Wallet Ecosystem
+                    </motion.div>
+
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
-                        className="text-3xl md:text-5xl font-display font-bold text-primary mb-6 px-4"
+                        className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-primary mb-8 px-4 tracking-tight leading-[1.05]"
                     >
-                        Social Grant Credential
+                        Social Grant <br className="hidden md:block" />
                     </motion.h2>
-                    <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto px-4">
-                        Experience seamless verifiable credentials across government and private ecosystems.
-                    </p>
+
+                    <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto px-4 leading-relaxed font-medium">
+  Discover how Vlinder enables real-world digital identity and social welfare use cases using MOSIP, Inji Wallet, Klefki Wallet, and interoperable verifiable credentials.                    </p>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-8 relative">
