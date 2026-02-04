@@ -85,9 +85,10 @@ const Playground = () => {
                     {/* Left: Content */}
                     <div className="text-left">
                         <motion.div
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
                         >
                             <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200 text-slate-600 text-[10px] font-bold tracking-[0.15em] uppercase mb-6 shadow-sm">
                                 <Cpu size={13} className="mr-2 text-blue-600" />
@@ -114,7 +115,7 @@ const Playground = () => {
                                     rel="noopener noreferrer"
                                     className="w-full sm:w-fit px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl hover:scale-[1.02] transition-all text-sm flex items-center justify-center group shadow-[0_8px_30px_rgb(37,99,235,0.25)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.35)] active:scale-95"
                                 >
-                                    Explore Playground
+                                    Explore Live Playground
                                     <ArrowUpRight size={18} className="ml-2 group-hover:rotate-45 transition-transform" />
                                 </a>
 
@@ -166,28 +167,28 @@ const Playground = () => {
                             </div>
 
                             {/* Hub Display */}
-                            <div className="relative flex flex-col items-center justify-center min-h-[320px]">
-                                {/* Animated Background Glow */}
+                            <div className="relative flex flex-col items-center justify-center min-h-[280px] sm:min-h-[320px]">
+                                {/* Animated Background Glow - Simplified for mobile */}
                                 <motion.div
                                     animate={!isMobile ? {
-                                        scale: [1, 1.15, 1],
+                                        scale: [1, 1.1, 1],
                                         opacity: [0.15, 0.25, 0.15]
-                                    } : { opacity: 0.2 }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className={`absolute inset-0 rounded-full blur-[80px] ${currentStep.bgDark} transform-gpu`}
+                                    } : { opacity: 0.15 }}
+                                    transition={!isMobile ? { duration: 4, repeat: Infinity, ease: "easeInOut" } : {}}
+                                    className={`absolute inset-0 rounded-full blur-[60px] sm:blur-[80px] ${currentStep.bgDark}`}
                                 />
 
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeTab}
-                                        initial={{ opacity: 0, scale: 0.92, y: 10 }}
-                                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                                        exit={{ opacity: 0, scale: 0.92, y: -10 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="relative w-full text-center transform-gpu"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                        className="relative w-full text-center"
                                     >
                                         {/* Premium Card UI */}
-                                        <div className="max-w-[280px] sm:max-w-[340px] mx-auto bg-gradient-to-br from-white via-slate-50 to-white border-2 border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden group">
+                                        <div className="max-w-[280px] sm:max-w-[340px] mx-auto bg-gradient-to-br from-white via-slate-50 to-white border-2 border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xl sm:shadow-2xl overflow-hidden">
                                             {/* Card Top */}
                                             <div className="flex justify-between items-start mb-6 sm:mb-8">
                                                 <div className={`p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-gradient-to-br ${currentStep.bg} ${currentStep.color} border ${currentStep.border} shadow-md`}>
@@ -204,7 +205,7 @@ const Playground = () => {
                                                     <motion.div
                                                         initial={{ width: 0 }}
                                                         animate={{ width: '100%' }}
-                                                        transition={{ duration: 1, ease: "easeOut" }}
+                                                        transition={{ duration: 0.8, ease: "easeOut" }}
                                                         className={`h-full bg-gradient-to-r ${currentStep.accent} shadow-sm`}
                                                     />
                                                 </div>
@@ -228,21 +229,21 @@ const Playground = () => {
                                                 </div>
                                             </div>
 
-                                            {/* Scan Beam Effect */}
+                                            {/* Scan Beam Effect - Desktop only */}
                                             {!isMobile && (
                                                 <motion.div
                                                     animate={{ top: ['-10%', '110%'] }}
                                                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                    className={`absolute left-0 right-0 h-[2px] bg-gradient-to-r ${currentStep.accent} z-10 shadow-lg opacity-30 transform-gpu`}
+                                                    className={`absolute left-0 right-0 h-[2px] bg-gradient-to-r ${currentStep.accent} z-10 shadow-lg opacity-30`}
                                                 />
                                             )}
                                         </div>
 
                                         {/* Description Below Card */}
                                         <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.2 }}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 0.15, duration: 0.3 }}
                                             className="mt-6 sm:mt-10 max-w-[260px] sm:max-w-[300px] mx-auto text-center"
                                         >
                                             <h4 className={`font-bold text-xs sm:text-sm mb-2 sm:mb-3 uppercase tracking-widest ${currentStep.color}`}>
@@ -257,9 +258,9 @@ const Playground = () => {
                             </div>
                         </div>
 
-                        {/* Decorative floating orbs */}
-                        <div className={`absolute -top-12 -right-12 w-40 h-40 bg-gradient-to-br from-emerald-200/30 to-emerald-300/20 rounded-full ${isMobile ? 'blur-[40px]' : 'blur-[60px]'} pointer-events-none`} />
-                        <div className={`absolute -bottom-12 -left-12 w-40 h-40 bg-gradient-to-br from-blue-200/30 to-blue-300/20 rounded-full ${isMobile ? 'blur-[40px]' : 'blur-[60px]'} pointer-events-none`} />
+                        {/* Decorative floating orbs - lighter on mobile */}
+                        <div className={`absolute -top-12 -right-12 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-br from-emerald-200/20 sm:from-emerald-200/30 to-emerald-300/15 sm:to-emerald-300/20 rounded-full ${isMobile ? 'blur-[30px]' : 'blur-[60px]'} pointer-events-none`} />
+                        <div className={`absolute -bottom-12 -left-12 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-br from-blue-200/20 sm:from-blue-200/30 to-blue-300/15 sm:to-blue-300/20 rounded-full ${isMobile ? 'blur-[30px]' : 'blur-[60px]'} pointer-events-none`} />
                     </div>
                 </div>
             </div>

@@ -225,7 +225,7 @@ const Hero = () => {
                         <motion.div
                             initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="inline-flex items-center px-4 py-1 rounded-full bg-accent/5 border border-accent/20 backdrop-blur-sm w-fit"
+                            className={`inline-flex items-center px-4 py-1 rounded-full bg-accent/5 border border-accent/20 ${isMobile ? '' : 'backdrop-blur-sm'} w-fit transform-gpu`}
                         >
                             <span className="w-1.5 h-1.5 rounded-full bg-accent mr-2 animate-pulse" />
                             <span className="text-accent font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold">MOSIP Connect 2026</span>
@@ -233,7 +233,7 @@ const Hero = () => {
                     </div>
 
                     {/* Innovative Navigation Dock - Integrated into Header */}
-                    <nav className="flex items-center gap-2 p-1.5 bg-slate-900/95 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-xl group hover:border-accent/40 transition-all duration-500">
+                    <nav className={`flex items-center gap-2 p-1.5 bg-slate-900/95 ${isMobile ? '' : 'backdrop-blur-2xl'} border border-white/20 rounded-3xl shadow-xl group hover:border-accent/40 transition-all duration-500 transform-gpu`}>
                         {[
                             { name: 'Ecosystem', id: 'demos', icon: Wallet },
                             { name: 'Life Cycle', id: 'lifecycle', icon: Shuffle },
@@ -244,7 +244,7 @@ const Hero = () => {
                                 onClick={() => {
                                     document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="flex items-center gap-2 px-3 py-2.5 rounded-2xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group/btn relative"
+                                className="flex items-center gap-2 px-3 py-2.5 rounded-2xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group/btn relative transform-gpu"
                             >
                                 <link.icon size={16} className="group-hover/btn:text-accent group-hover/btn:scale-110 transition-all" />
                                 <span className="text-[11px] font-bold tracking-tight hidden xl:block">{link.name}</span>
@@ -264,7 +264,7 @@ const Hero = () => {
                         whileHover={isMobile ? {} : { scale: 1.05, boxShadow: "0 0 30px rgba(45,226,230,0.3)" }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsTeamModalOpen(true)}
-                        className="group relative px-6 py-3 bg-white/[0.03] hover:bg-white/[0.08] text-white rounded-full border border-white/10 backdrop-blur-2xl transition-all flex items-center gap-3 shadow-2xl overflow-hidden"
+                        className={`group relative px-6 py-3 bg-white/[0.03] hover:bg-white/[0.08] text-white rounded-full border border-white/10 ${isMobile ? '' : 'backdrop-blur-2xl'} transition-all flex items-center gap-3 shadow-2xl overflow-hidden transform-gpu`}
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                         <Users className="w-5 h-5 text-accent group-hover:rotate-12 transition-transform" />
@@ -282,7 +282,7 @@ const Hero = () => {
                 <div className={`absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-accent/5 rounded-full ${isMobile ? 'blur-xl' : 'blur-2xl md:blur-3xl'}`} />
 
                 {/* Network Grid Overlay - Simplified on Mobile */}
-                <div className={`absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] ${isMobile ? 'bg-[size:100px_100px]' : 'bg-[size:50px_50px]'} [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]`} />
+                <div className={`absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] ${isMobile ? 'bg-[size:150px_150px] opacity-40' : 'bg-[size:50px_50px]'} [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]`} />
 
                 {/* Innovative Data Flow - Hidden on small mobile and when modal is open */}
                 {!isMobile && !isTeamModalOpen && <DataFlow />}
@@ -430,10 +430,10 @@ const Hero = () => {
                         {standards.map((item, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 + i * 0.1 }}
-                                className={`relative p-6 rounded-3xl bg-white/[0.03] border ${item.border} flex items-center gap-5 backdrop-blur-sm`}
+                                transition={{ delay: isMobile ? 0 : 0.5 + i * 0.1 }}
+                                className={`relative p-6 rounded-3xl bg-white/[0.03] border ${item.border} flex items-center gap-5 backdrop-blur-sm transform-gpu`}
                             >
                                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                                     <item.icon className="w-6 h-6 text-accent" />
