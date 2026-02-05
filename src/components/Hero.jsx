@@ -364,18 +364,18 @@ const Hero = () => {
                         </div>
                     </motion.div>
 
-                    {/* Circular Orbit for Standards (Replacement for Grid) */}
-                    <div className="relative h-[550px] hidden lg:flex items-center justify-center transform-gpu">
+                    {/* Responsive Circular Orbit for Standards */}
+                    <div className={`relative ${isMobile ? 'h-[400px]' : 'h-[550px]'} flex items-center justify-center transform-gpu`}>
                         {/* Animated Rings */}
-                        <div className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]" />
-                        <div className="absolute w-[450px] h-[450px] rounded-full border border-dashed border-white/5 animate-[spin_60s_linear_infinite_reverse]" />
+                        <div className={`absolute ${isMobile ? 'w-[200px] h-[200px]' : 'w-[300px] h-[300px]'} rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]`} />
+                        <div className={`absolute ${isMobile ? 'w-[300px] h-[300px]' : 'w-[450px] h-[450px]'} rounded-full border border-dashed border-white/5 animate-[spin_60s_linear_infinite_reverse]`} />
 
                         {/* Connection Lines (Static SVG) */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none">
                             {standards.map((_, index) => {
                                 const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                                const x2 = 50 + (Math.cos(angle) * 35);
-                                const y2 = 50 + (Math.sin(angle) * 35);
+                                const x2 = 50 + (Math.cos(angle) * (isMobile ? 25 : 35));
+                                const y2 = 50 + (Math.sin(angle) * (isMobile ? 25 : 35));
                                 return (
                                     <line
                                         key={index}
@@ -391,16 +391,16 @@ const Hero = () => {
 
                         {/* Central Hub */}
                         <div className="relative z-20">
-                            <div className="absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse" />
-                            <div className="w-28 h-28 bg-primary/80 backdrop-blur-xl rounded-full border border-accent/30 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(45,226,230,0.2)]">
-                                <div className="text-2xl font-bold font-display text-accent tracking-tighter">Klefki</div>
+                            <div className={`absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse`} />
+                            <div className={`${isMobile ? 'w-20 h-20' : 'w-28 h-28'} bg-primary/80 backdrop-blur-xl rounded-full border border-accent/30 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(45,226,230,0.2)]`}>
+                                <div className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold font-display text-accent tracking-tighter`}>Klefki</div>
                             </div>
                         </div>
 
                         {/* Orbiting Standards Cards */}
                         {standards.map((item, index) => {
                             const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                            const radius = 220;
+                            const radius = isMobile ? 140 : 220;
                             const x = Math.cos(angle) * radius;
                             const y = Math.sin(angle) * radius;
 
@@ -412,38 +412,17 @@ const Hero = () => {
                                     animate={{ x: x, y: y, opacity: 1 }}
                                     transition={{ duration: 0.8, delay: 0.5 + index * 0.1, ease: "easeOut" }}
                                 >
-                                    <div className={`p-5 rounded-[2.5rem] bg-white/[0.03] border ${item.border} backdrop-blur-xl shadow-2xl hover:bg-white/10 transition-all duration-500 transform-gpu group cursor-pointer text-center w-40 h-40 flex flex-col items-center justify-center border-white/10`}>
-                                        <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500 shadow-inner overflow-hidden relative`}>
+                                    <div className={`p-4 md:p-5 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.03] border ${item.border} ${isMobile ? '' : 'backdrop-blur-xl'} shadow-2xl hover:bg-white/10 transition-all duration-500 transform-gpu group cursor-pointer text-center ${isMobile ? 'w-28 h-28' : 'w-40 h-40'} flex flex-col items-center justify-center border-white/10`}>
+                                        <div className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500 shadow-inner overflow-hidden relative`}>
                                             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                            <item.icon className="w-6 h-6 text-accent relative z-10" />
+                                            <item.icon className={`${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-accent relative z-10`} />
                                         </div>
-                                        <h4 className="text-xs font-bold text-white mb-1.5 leading-tight tracking-tight uppercase">{item.name}</h4>
-                                        <p className="text-[10px] text-gray-400 font-medium leading-tight max-w-[80px]">{item.description}</p>
+                                        <h4 className={`${isMobile ? 'text-[8px]' : 'text-xs'} font-bold text-white mb-1 leading-tight tracking-tight uppercase`}>{item.name}</h4>
+                                        <p className={`${isMobile ? 'text-[7px]' : 'text-[10px]'} text-gray-400 font-medium leading-tight ${isMobile ? 'max-w-[60px]' : 'max-w-[80px]'}`}>{item.description}</p>
                                     </div>
                                 </motion.div>
                             );
                         })}
-                    </div>
-
-                    {/* Mobile Standards Grid */}
-                    <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {standards.map((item, i) => (
-                            <motion.div
-                                key={i}
-                                initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: isMobile ? 0 : 0.5 + i * 0.1 }}
-                                className={`relative p-6 rounded-3xl bg-white/[0.03] border ${item.border} flex items-center gap-5 backdrop-blur-sm transform-gpu`}
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
-                                    <item.icon className="w-6 h-6 text-accent" />
-                                </div>
-                                <div className="text-left">
-                                    <h4 className="text-sm font-bold text-white mb-1">{item.name}</h4>
-                                    <p className="text-[10px] text-gray-400 font-medium">{item.description}</p>
-                                </div>
-                            </motion.div>
-                        ))}
                     </div>
                 </div>
             </div>
