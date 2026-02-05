@@ -12,6 +12,7 @@ import shree from '../../src/assets/shree.jpg'
 import subashree from '../../src/assets/subashree.jpeg'
 import kishore from '../../src/assets/Kishore.jpeg'
 import asir from '../../src/assets/asir.jpg'
+import nicholas from '../../src/assets/Nicholas.png'
 const DataFlow = () => (
     <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -146,6 +147,12 @@ const Hero = () => {
             role: "Senior Staff Software Engineer",
             linkedin: "https://in.linkedin.com/in/mahendra-c-5609a376",
             photo: mahendra,
+        },
+        {
+            name: "Nicholas",
+            role: "Consultant - Diagon Consulting Ltd",
+            linkedin: "",
+            photo: nicholas,
         },
         {
             name: "Ajay Raja Pandiyan R",
@@ -493,7 +500,7 @@ const Hero = () => {
                                                 duration: 0.4,
                                                 ease: "easeOut"
                                             }}
-                                            className={`group relative transform-gpu ${idx === teamMembers.length - 1 ? 'lg:col-span-2 lg:mx-auto lg:w-[calc(50%-1rem)] 2xl:col-span-1 2xl:w-full' : ''}`}
+                                            className="group relative transform-gpu"
                                         >
                                             <div className="relative bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 lg:p-8 transition-all duration-300 hover:bg-white/[0.08] hover:border-accent/30 overflow-hidden transform-gpu">
 
