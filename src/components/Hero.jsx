@@ -326,104 +326,118 @@ const Hero = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-60 md:pt-48 pb-20">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    {/* Text Content */}
-                    <motion.div
-                        initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: isMobile ? 0 : 0.8 }}
-                        className="text-left"
-                    >
-                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono mb-6">
-                            <Zap size={14} className="mr-2" />
-                            Universal Interoperability
-                        </div>
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] text-white mb-8 tracking-tight">
-                            One Wallet. <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-accent to-blue-500">
-                                Every Credential
-                            </span> <br />
-                            Standard.
-                        </h1>
+                    {/* Standards Orbit Logic extracted for reusability */}
+                    {(() => {
+                        const StandardsOrbit = ({ mobile = false }) => (
+                            <div className={`relative ${mobile ? 'h-[400px] mb-8' : 'h-[550px] lg:order-2'} flex items-center justify-center transform-gpu`}>
+                                {/* Animated Rings */}
+                                <div className={`absolute ${mobile ? 'w-[200px] h-[200px]' : 'w-[300px] h-[300px]'} rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]`} />
+                                <div className={`absolute ${mobile ? 'w-[300px] h-[300px]' : 'w-[450px] h-[450px]'} rounded-full border border-dashed border-white/5 animate-[spin_60s_linear_infinite_reverse]`} />
 
-                        <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed font-medium">
-                            Powering the next generation of secure, interoperable digital identity - built on open standards. </p>
+                                {/* Connection Lines (Static SVG) */}
+                                <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                                    {standards.map((_, index) => {
+                                        const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
+                                        const x2 = 50 + (Math.cos(angle) * (mobile ? 25 : 35));
+                                        const y2 = 50 + (Math.sin(angle) * (mobile ? 25 : 35));
+                                        return (
+                                            <line
+                                                key={index}
+                                                x1="50%" y1="50%"
+                                                x2={`${x2}%`} y2={`${y2}%`}
+                                                stroke="rgba(45, 226, 230, 0.1)"
+                                                strokeWidth="1"
+                                                strokeDasharray="4 4"
+                                            />
+                                        );
+                                    })}
+                                </svg>
 
-                        <div className="flex flex-wrap gap-4">
-                            <button
-                                onClick={() => {
-                                    document.getElementById('playground')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="group relative px-8 py-4 bg-accent text-primary font-bold rounded-full overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(45,226,230,0.4)]"
-                            >
-                                <span className="relative z-10 flex items-center">
-                                    Explore Playground
-                                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </span>
-                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                            </button>
-                        </div>
-                    </motion.div>
+                                {/* Central Hub */}
+                                <div className="relative z-20">
+                                    <div className={`absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse`} />
+                                    <div className={`${mobile ? 'w-20 h-20' : 'w-28 h-28'} bg-primary/80 backdrop-blur-xl rounded-full border border-accent/30 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(45,226,230,0.2)]`}>
+                                        <div className={`${mobile ? 'text-lg' : 'text-2xl'} font-bold font-display text-accent tracking-tighter`}>Klefki</div>
+                                    </div>
+                                </div>
 
-                    {/* Responsive Circular Orbit for Standards */}
-                    <div className={`relative ${isMobile ? 'h-[400px]' : 'h-[550px]'} flex items-center justify-center transform-gpu`}>
-                        {/* Animated Rings */}
-                        <div className={`absolute ${isMobile ? 'w-[200px] h-[200px]' : 'w-[300px] h-[300px]'} rounded-full border border-dashed border-accent/20 animate-[spin_40s_linear_infinite]`} />
-                        <div className={`absolute ${isMobile ? 'w-[300px] h-[300px]' : 'w-[450px] h-[450px]'} rounded-full border border-dashed border-white/5 animate-[spin_60s_linear_infinite_reverse]`} />
+                                {/* Orbiting Standards Cards */}
+                                {standards.map((item, index) => {
+                                    const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
+                                    const radius = mobile ? 140 : 220;
+                                    const x = Math.cos(angle) * radius;
+                                    const y = Math.sin(angle) * radius;
 
-                        {/* Connection Lines (Static SVG) */}
-                        <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                            {standards.map((_, index) => {
-                                const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                                const x2 = 50 + (Math.cos(angle) * (isMobile ? 25 : 35));
-                                const y2 = 50 + (Math.sin(angle) * (isMobile ? 25 : 35));
-                                return (
-                                    <line
-                                        key={index}
-                                        x1="50%" y1="50%"
-                                        x2={`${x2}%`} y2={`${y2}%`}
-                                        stroke="rgba(45, 226, 230, 0.1)"
-                                        strokeWidth="1"
-                                        strokeDasharray="4 4"
-                                    />
-                                );
-                            })}
-                        </svg>
-
-                        {/* Central Hub */}
-                        <div className="relative z-20">
-                            <div className={`absolute inset-0 bg-accent/20 rounded-full blur-2xl animate-pulse`} />
-                            <div className={`${isMobile ? 'w-20 h-20' : 'w-28 h-28'} bg-primary/80 backdrop-blur-xl rounded-full border border-accent/30 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(45,226,230,0.2)]`}>
-                                <div className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold font-display text-accent tracking-tighter`}>Klefki</div>
+                                    return (
+                                        <motion.div
+                                            key={index}
+                                            className="absolute z-10 transform-gpu"
+                                            initial={{ x: 0, y: 0, opacity: 0 }}
+                                            animate={{ x: x, y: y, opacity: 1 }}
+                                            transition={{ duration: 0.8, delay: 0.5 + index * 0.1, ease: "easeOut" }}
+                                        >
+                                            <div className={`p-4 md:p-5 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.03] border ${item.border} ${mobile ? '' : 'backdrop-blur-xl'} shadow-2xl hover:bg-white/10 transition-all duration-500 transform-gpu group cursor-pointer text-center ${mobile ? 'w-28 h-28' : 'w-40 h-40'} flex flex-col items-center justify-center border-white/10`}>
+                                                <div className={`${mobile ? 'w-8 h-8' : 'w-12 h-12'} rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500 shadow-inner overflow-hidden relative`}>
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                    <item.icon className={`${mobile ? 'w-4 h-4' : 'w-6 h-6'} text-accent relative z-10`} />
+                                                </div>
+                                                <h4 className={`${mobile ? 'text-[8px]' : 'text-xs'} font-bold text-white mb-1 leading-tight tracking-tight uppercase`}>{item.name}</h4>
+                                                <p className={`${mobile ? 'text-[7px]' : 'text-[10px]'} text-gray-400 font-medium leading-tight ${mobile ? 'max-w-[60px]' : 'max-w-[80px]'}`}>{item.description}</p>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
                             </div>
-                        </div>
+                        );
 
-                        {/* Orbiting Standards Cards */}
-                        {standards.map((item, index) => {
-                            const angle = (index * 72 * Math.PI) / 180 - (Math.PI / 2);
-                            const radius = isMobile ? 140 : 220;
-                            const x = Math.cos(angle) * radius;
-                            const y = Math.sin(angle) * radius;
+                        return (
+                            <>
+                                {/* Desktop Orbit (Right Column) */}
+                                {!isMobile && <StandardsOrbit />}
 
-                            return (
+                                {/* Text Content */}
                                 <motion.div
-                                    key={index}
-                                    className="absolute z-10 transform-gpu"
-                                    initial={{ x: 0, y: 0, opacity: 0 }}
-                                    animate={{ x: x, y: y, opacity: 1 }}
-                                    transition={{ duration: 0.8, delay: 0.5 + index * 0.1, ease: "easeOut" }}
+                                    initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: isMobile ? 0 : 0.8 }}
+                                    className="text-left lg:order-1"
                                 >
-                                    <div className={`p-4 md:p-5 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.03] border ${item.border} ${isMobile ? '' : 'backdrop-blur-xl'} shadow-2xl hover:bg-white/10 transition-all duration-500 transform-gpu group cursor-pointer text-center ${isMobile ? 'w-28 h-28' : 'w-40 h-40'} flex flex-col items-center justify-center border-white/10`}>
-                                        <div className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-500 shadow-inner overflow-hidden relative`}>
-                                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                            <item.icon className={`${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-accent relative z-10`} />
-                                        </div>
-                                        <h4 className={`${isMobile ? 'text-[8px]' : 'text-xs'} font-bold text-white mb-1 leading-tight tracking-tight uppercase`}>{item.name}</h4>
-                                        <p className={`${isMobile ? 'text-[7px]' : 'text-[10px]'} text-gray-400 font-medium leading-tight ${isMobile ? 'max-w-[60px]' : 'max-w-[80px]'}`}>{item.description}</p>
+                                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono mb-6">
+                                        <Zap size={14} className="mr-2" />
+                                        Universal Interoperability
+                                    </div>
+                                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] text-white mb-8 tracking-tight">
+                                        One Wallet. <br />
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-accent to-blue-500">
+                                            Every Credential
+                                        </span> <br />
+                                        Standard.
+                                    </h1>
+
+                                    {/* Mobile Orbit (Between Heading and Paragraph) */}
+                                    {isMobile && <StandardsOrbit mobile={true} />}
+
+                                    <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed font-medium">
+                                        Powering the next generation of secure, interoperable digital identity - built on open standards. </p>
+
+                                    <div className="flex flex-wrap gap-4">
+                                        <button
+                                            onClick={() => {
+                                                document.getElementById('playground')?.scrollIntoView({ behavior: 'smooth' });
+                                            }}
+                                            className="group relative px-8 py-4 bg-accent text-primary font-bold rounded-full overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(45,226,230,0.4)]"
+                                        >
+                                            <span className="relative z-10 flex items-center">
+                                                Explore Playground
+                                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                            </span>
+                                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                                        </button>
                                     </div>
                                 </motion.div>
-                            );
-                        })}
-                    </div>
+                            </>
+                        );
+                    })()}
                 </div>
             </div>
             {/* Team Modal - Innovative Fullscreen Glass Version */}
