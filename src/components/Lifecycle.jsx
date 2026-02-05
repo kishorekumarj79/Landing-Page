@@ -195,7 +195,7 @@ const Lifecycle = () => {
 
                                 {/* Icon Center Node */}
                                 <div className="relative z-10 flex-shrink-0 order-1 md:order-none">
-                                    <div className="w-16 h-16 rounded-full bg-slate-900 border-4 border-secondary flex items-center justify-center shadow-[0_0_30px_rgba(108,92,231,0.5)]">
+                                    <div className="w-16 h-16 rounded-full bg-primary border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(45,226,230,0.15)] ring-4 ring-white/5">
                                         <step.icon className="w-8 h-8 text-accent" />
                                     </div>
                                 </div>
